@@ -4,5 +4,9 @@
 
 #ifndef GOLD_DELETE_H
 #define GOLD_DELETE_H
-
+#include <string>
+class Delete{
+public:
+    void delete_user_table(std::string table, int id);
+};
 #endif //GOLD_DELETE_H
