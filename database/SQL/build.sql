@@ -7,7 +7,7 @@ create table user_information(
 	password varchar(20) not null
 );
 
-create table nap_spot(
+create table nap_spots(
 	id int unique not null,
 	latitude decimal(10) not null,
 	longitude decimal(10) not null,
