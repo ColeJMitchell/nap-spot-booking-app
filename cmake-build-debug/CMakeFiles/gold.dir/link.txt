@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/gold.dir/main.cpp.o CMakeFiles/gold.dir/dbtools/Insert.cpp.o CMakeFiles/gold.dir/dbtools/Delete.cpp.o CMakeFiles/gold.dir/dbtools/Update.cpp.o CMakeFiles/gold.dir/dbtools/Select.cpp.o -o gold  -lsqlite3 
