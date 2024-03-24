@@ -6,6 +6,7 @@
 #include <sqlite3.h>
 #include <iostream>
 
+//update user information such as a password, email, or username.
 void Update::update_user_information(std::string column, int id, std::string value) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);

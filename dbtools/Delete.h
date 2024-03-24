@@ -7,6 +7,6 @@
 #include <string>
 class Delete{
 public:
-    void delete_user_table(std::string table, int id);
+    void delete_from_table(std::string table, int id);
 };
 #endif //GOLD_DELETE_H

@@ -5,10 +5,10 @@
 #include <sqlite3.h>
 #include <iostream>
 
-void Delete::delete_user_table(std::string table, int id) {
+//deletes a user if they violated rules or client wants to delete their account / removes a nap spot from favorites list
+void Delete::delete_from_table(std::string table, int id) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
-    std::string name = "mace";
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "DELETE FROM ";
@@ -30,4 +30,6 @@ void Delete::delete_user_table(std::string table, int id) {
     }
     sqlite3_close(curr_db);
 }
+
+
 

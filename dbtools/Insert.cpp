@@ -7,6 +7,8 @@
 #include <iostream>
 #include <iomanip>
 
+
+//adds a user to the database when they sign up
 void Insert::insert_user(int id, std::string first_name, std::string last_name, std::string email, std::string username, std::string password) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
@@ -46,6 +48,8 @@ void Insert::insert_user(int id, std::string first_name, std::string last_name, 
     sqlite3_close(curr_db);
 }
 
+
+//adds a nap spot if administrator approved a request or the user adds a new favorite nap spot
 void Insert::insert_nap_spot_or_favorite(std::string table, int id, float latitude, float longitude, std::string name,
                                          std::string attribute1, std::string attribute2, std::string attribute3,
                                          int num_people, std::string description){
