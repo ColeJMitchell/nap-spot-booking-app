@@ -44,6 +44,8 @@ add_executable(frontend frontend/gui.cpp
         dbtools/Select.cpp
         dbtools/Select.h
         frontend/gui.cpp
+        frontend/Button.cpp
+        frontend/Button.h
 )
 target_link_libraries(tests sqlite3)
 target_link_libraries(frontend ${GTKMM_LIBRARIES})
