@@ -5,17 +5,29 @@
 #include "Button.h"
 int main(int argc, char *argv[])
 {
-    Button button11("Button 11 -- PACK_EXPAND_PADDING");
-    Button button12("Button 12 -- PACK_EXPAND_WIDGET");
-    Button button13("Button 13 -- EXPAND");
+
 
     auto app =
             Gtk::Application::create(argc, argv,
-                                     "something.more");
+                                     "hi.more");
 
     Gtk::Window window;
     //number of pixels for a full screen
     window.set_default_size(1920, 1080);
+
+    Gtk::Button button1("Favorite Nap Spots");
+    Gtk::Button button2("Book a Nap Spot");
+    Gtk::Button button3("Submit a Location Request");
+
+    Gtk::Box hbox(Gtk::ORIENTATION_HORIZONTAL);
+    hbox.set_spacing(0);
+    hbox.
+    hbox.pack_start(button1);
+    hbox.pack_start(button2);
+    hbox.pack_end(button3);
+
+    window.add(hbox);
+    window.show_all_children();
 
     return app->run(window);
 }
