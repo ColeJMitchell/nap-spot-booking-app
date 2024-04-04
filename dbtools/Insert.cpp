@@ -55,9 +55,6 @@ void Insert::insert_nap_spot_or_favorite(std::string table, int id, float latitu
                                          int num_people, std::string description){
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(2) << latitude;
-    std::string strValue = ss.str();
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO ";

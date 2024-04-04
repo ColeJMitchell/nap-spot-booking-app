@@ -21,7 +21,6 @@ int main(int argc, char *argv[])
 
     Gtk::Box hbox(Gtk::ORIENTATION_HORIZONTAL);
     hbox.set_spacing(0);
-    hbox.
     hbox.pack_start(button1);
     hbox.pack_start(button2);
     hbox.pack_end(button3);
