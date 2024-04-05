@@ -16,7 +16,8 @@ create table nap_spots(
 	attribute_2 varchar(10),
 	attribute_3 varchar(10),
 	num_people int not null,
-	description varchar(100)
+	description varchar(100),
+	reserved int not null
 );
 
 create table favorites_list(
@@ -28,6 +29,7 @@ create table favorites_list(
     attribute_2 varchar(10),
     attribute_3 varchar(10),
     num_people int not null,
-    description varchar(100)
+    description varchar(100),
+    reserved int null
 );
 .separator ","

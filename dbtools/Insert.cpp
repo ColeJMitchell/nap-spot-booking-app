@@ -52,14 +52,14 @@ void Insert::insert_user(int id, std::string first_name, std::string last_name, 
 //adds a nap spot if administrator approved a request or the user adds a new favorite nap spot
 void Insert::insert_nap_spot_or_favorite(std::string table, int id, float latitude, float longitude, std::string name,
                                          std::string attribute1, std::string attribute2, std::string attribute3,
-                                         int num_people, std::string description){
+                                         int num_people, std::string description ,int reserved){
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO ";
     sql += table;
-    sql += " ( id, latitude, longitude, name, attribute_1, attribute_2, attribute_3, num_people, description) ";
+    sql += " ( id, latitude, longitude, name, attribute_1, attribute_2, attribute_3, num_people, description, reserved) ";
     sql += "VALUES (";
     sql += std::to_string(id);
     sql += ",";
@@ -84,6 +84,8 @@ void Insert::insert_nap_spot_or_favorite(std::string table, int id, float latitu
     sql += ",";
     sql += "\"";
     sql += description;
+    sql += " ";
+    sql += std::to_string(reserved);
     sql += "\");";
     retCode = sqlite3_exec(curr_db,
                            sql.c_str(),
