@@ -3,6 +3,7 @@
 //
 
 #include "Button.h"
+#include "Insert.h"
 Button::Button(Glib::ustring s) {
     button_label = s;
 // This function will add a label to the button using the passed value.
@@ -27,5 +28,7 @@ Button::~Button() { }
 // A method that connected to the button by the command above.
 void Button::on_button_clicked()
 {
+    Insert i;
+    i.insert_user(1,"Cole","Mitchell","mitchecj@lafayette.edu","Cedrien","Password");
     std::cout << button_label << " was clicked." << std::endl;
 }
