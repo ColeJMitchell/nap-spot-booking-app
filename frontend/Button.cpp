@@ -10,25 +10,32 @@ Button::Button(Glib::ustring s) {
     add_label(s);
 // This connects the button widget (referenced by this) to a pointer of
 // the on_button_clicked method.
-    signal_clicked().connect(
-            sigc::mem_fun(*this, &Button::on_button_clicked) );
-}
-Button::Button()
-{
-    button_label = "test Button";
-// This function will add a label to the button using a default value.
-    add_label(button_label);
-// This connects the button widget (referenced by this) to a pointer of
-// the on_button_clicked method.
-    signal_clicked().connect(
-            sigc::mem_fun(*this, &Button::on_button_clicked) );
+    if(s == "Favorite Nap Spots") {
+        signal_clicked().connect(
+                sigc::mem_fun(*this, &Button::on_button1_clicked));
+    }
+    else if(s == "Book a Nap Spot") {
+        signal_clicked().connect(
+                sigc::mem_fun(*this, &Button::on_button2_clicked));
+    }
+    else if(s == "Submit a Location Request") {
+        signal_clicked().connect(
+                sigc::mem_fun(*this, &Button::on_button3_clicked));
+    }
 }
 // This is a destructor that does nothing in this case.
 Button::~Button() { }
 // A method that connected to the button by the command above.
-void Button::on_button_clicked()
+void Button::on_button1_clicked()
 {
-    Insert i;
-    i.insert_user(1,"Cole","Mitchell","mitchecj@lafayette.edu","Cedrien","Password");
-    std::cout << button_label << " was clicked." << std::endl;
+    std::cout << "button 1 was clicked"<< std::endl;
+    page_num = 1;
+}
+void Button::on_button2_clicked()
+{
+    std::cout << "button 2 was clicked"<< std::endl;
+}
+void Button::on_button3_clicked()
+{
+    std::cout << "button 3 was clicked"<< std::endl;
 }

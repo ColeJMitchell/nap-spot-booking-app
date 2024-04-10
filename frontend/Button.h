@@ -13,11 +13,15 @@ public:
     Button();
     Button(Glib::ustring s);
     virtual ~Button();
+    static int page_num;
 protected:
 //Signal handlers:
-    void on_button_clicked();
+    void on_button1_clicked();
+    void on_button2_clicked();
+    void on_button3_clicked();
 //Child widgets:
     Glib::ustring button_label;
+
 };
 
 #endif //GOLD_BUTTON_H
