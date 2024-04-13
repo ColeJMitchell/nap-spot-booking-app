@@ -7,6 +7,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
 #include <iostream>
+#include "Multiple_windows.h"
 class Button : public Gtk::Button
 {
 public:

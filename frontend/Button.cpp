@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Insert.h"
 #include "gtkmm.h"
+#include "Multiple_windows.h"
 bool button1 = false;
 Button::Button(Glib::ustring s) {
     page_num = 0;
