@@ -3,6 +3,7 @@
 //
 #include <gtkmm.h>
 #include "Button.h"
+#include "Multiple_windows.h"
 int main(int argc, char *argv[])
 {
 
@@ -11,19 +12,6 @@ int main(int argc, char *argv[])
             Gtk::Application::create(argc, argv,
                                      "hi.more");
 
-    Gtk::Window window;
-    //number of pixels for a full screen
-    window.set_default_size(1920, 1080);
-
-    Button button1("Favorite Nap Spots");
-    Button button2("Book a Nap Spot");
-    Button button3("Submit a Location Request");
-    Gtk::Box hbox(Gtk::ORIENTATION_HORIZONTAL);
-    hbox.set_spacing(0);
-    hbox.pack_start(button1);
-    hbox.pack_start(button2);
-    hbox.pack_end(button3);
-    window.add(hbox);
-    window.show_all_children();
+    Multiple_windows window;
     return app->run(window);
 }
