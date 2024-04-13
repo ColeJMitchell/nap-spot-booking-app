@@ -23,9 +23,7 @@ int main(int argc, char *argv[])
     hbox.pack_start(button1);
     hbox.pack_start(button2);
     hbox.pack_end(button3);
-
     window.add(hbox);
     window.show_all_children();
-
-    return app->run(window);
+    app->run(window);
 }

@@ -13,7 +13,7 @@ public:
     Button();
     Button(Glib::ustring s);
     virtual ~Button();
-    static int page_num;
+    int page_num;
 protected:
 //Signal handlers:
     void on_button1_clicked();
