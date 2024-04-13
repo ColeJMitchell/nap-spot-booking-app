@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Insert.h"
 #include "gtkmm.h"
+bool button1 = false;
 Button::Button(Glib::ustring s) {
     page_num = 0;
     button_label = s;
@@ -30,7 +31,7 @@ Button::~Button() { }
 // A method that connected to the button by the command above.
 void Button::on_button1_clicked()
 {
-    page_num = 1;
+    button1=true;
     std::cout << "button 1 was clicked"<< std::endl;
 }
 void Button::on_button2_clicked()

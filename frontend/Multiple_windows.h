@@ -9,7 +9,9 @@
 class Multiple_windows : public Gtk:: Window{
 public:
     Multiple_windows();
+    void change_to_page1();
 
+    void change_to_page2();
 };
 
 
