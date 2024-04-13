@@ -46,8 +46,8 @@ add_executable(frontend frontend/gui.cpp
         frontend/gui.cpp
         frontend/Button.cpp
         frontend/Button.h
-        frontend/Window.cpp
-        frontend/Window.h
+        frontend/Multiple_windows.cpp
+        frontend/Multiple_windows.h
 )
 target_link_libraries(tests sqlite3)
 target_link_libraries(frontend ${GTKMM_LIBRARIES})
