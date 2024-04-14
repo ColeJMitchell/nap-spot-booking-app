@@ -11,6 +11,8 @@
 class Button : public Gtk::Button
 {
 public:
+    bool log;
+    bool sign_up;
     Button();
     Button(Glib::ustring s);
     virtual ~Button();
@@ -22,7 +24,6 @@ protected:
     void on_button3_clicked();
 //Child widgets:
     Glib::ustring button_label;
-
 };
 
 #endif //GOLD_BUTTON_H

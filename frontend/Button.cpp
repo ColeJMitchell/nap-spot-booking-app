@@ -6,10 +6,13 @@
 #include "Insert.h"
 #include "gtkmm.h"
 #include "Multiple_windows.h"
-bool button1 = false;
+
 Button::Button(Glib::ustring s) {
+    log = false;
+    sign_up = false;
     page_num = 0;
     button_label = s;
+    set_size_request(250,150);
 // This function will add a label to the button using the passed value.
     add_label(s);
 // This connects the button widget (referenced by this) to a pointer of
@@ -32,7 +35,6 @@ Button::~Button() { }
 // A method that connected to the button by the command above.
 void Button::on_button1_clicked()
 {
-    button1=true;
     std::cout << "button 1 was clicked"<< std::endl;
 }
 void Button::on_button2_clicked()

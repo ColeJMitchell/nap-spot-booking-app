@@ -13,6 +13,8 @@ public:
     void change_to_page1();
 
     void change_to_page2();
+
+    void on_sign_up_clicked();
 };
 
 
