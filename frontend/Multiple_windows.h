@@ -19,6 +19,8 @@ public:
     void on_sign_up_clicked();
 
     void on_password_entered();
+
+    void on_username_entered();
 };
 
 
