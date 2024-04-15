@@ -7,12 +7,12 @@
 #include "gtkmm.h"
 #include "Multiple_windows.h"
 
-Button::Button(Glib::ustring s) {
+Button::Button(Glib::ustring s, int x, int y) {
     log = false;
     sign_up = false;
     page_num = 0;
     button_label = s;
-    set_size_request(250,150);
+    set_size_request(x,y);
 // This function will add a label to the button using the passed value.
     add_label(s);
 // This connects the button widget (referenced by this) to a pointer of

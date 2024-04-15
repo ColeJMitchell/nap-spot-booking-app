@@ -28,8 +28,8 @@ void Multiple_windows::change_to_page1(){
 
     // Allocate memory for the Gtk::Box and Gtk::Button dynamically
     fix = Gtk::manage(new Gtk::Fixed);;
-    b = new Button("Sign Up");
-    b2 = new Button("Log In");
+    b = new Button("Sign Up",250,150);
+    b2 = new Button("Log In",250,150);
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_sign_up_clicked));
     fix->put(*b,1920/2-550,1080/2-120);
     fix->put(*b2,1920/2+250,1080/2-120);
@@ -48,7 +48,7 @@ void Multiple_windows::change_to_page2(){
     l->set_label("Password");
     l2 = Gtk::manage(new Gtk::Label);
     l2->set_label("Username");
-    b3 = new Button("Submit");
+    b3 = new Button("Submit",170,100);
     fix->put(*l,1920/2-110,1080/2+60);
     fix->put(*l2,1920/2-110,1080/2-80);
     fix ->put(*e,1920/2-120,1080/2+20);
