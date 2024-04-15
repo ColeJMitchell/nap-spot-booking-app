@@ -23,6 +23,8 @@ public:
     void on_username_entered();
 
     void on_submit();
+
+    void change_to_sign_up();
 };
 
 

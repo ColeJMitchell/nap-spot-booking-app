@@ -41,7 +41,7 @@ void Multiple_windows::change_to_page1(){
 }
 
 //second page which has entry boxes for signing up for the first time
-void Multiple_windows::change_to_page2(){
+void Multiple_windows::change_to_sign_up(){
     override_background_color(Gdk::RGBA("light blue"));
     e = Gtk::manage(new Gtk::Entry);
     e2 = Gtk::manage(new Gtk::Entry);
@@ -65,9 +65,9 @@ void Multiple_windows::change_to_page2(){
 //checks if sign up button is clicked and switches page if it is
 void Multiple_windows::on_sign_up_clicked() {
     // Change to page 2
-    change_to_page2();
     fix->remove(*b);
     fix->remove(*b2);
+    change_to_sign_up();
 }
 
 //callback for password input in entry widget
@@ -83,4 +83,9 @@ void Multiple_windows::on_username_entered(){
 void Multiple_windows::on_submit(){
     Insert i;
     i.insert_user(username,password);
+    fix->remove(*e);
+    fix->remove(*e2);
+    fix->remove(*l);
+    fix->remove(*l2);
+    fix->remove(*b3);
 }
