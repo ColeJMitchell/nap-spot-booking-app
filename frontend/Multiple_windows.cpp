@@ -80,6 +80,10 @@ void Multiple_windows::change_to_loginpage(){
     show_all_children();
 }
 
+void Multiple_windows::change_to_home_page(){
+    override_background_color(Gdk::RGBA("black"));
+}
+
 //checks if sign up button is clicked and switches page if it is
 void Multiple_windows::on_sign_up_clicked() {
     // Change to page 2
@@ -113,4 +117,7 @@ void Multiple_windows::on_submit(){
     fix->remove(*l);
     fix->remove(*l2);
     fix->remove(*b3);
+    password = "";
+    username = "";
+    change_to_home_page();
 }
