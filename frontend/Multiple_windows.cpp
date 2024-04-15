@@ -8,9 +8,12 @@
 Gtk::Fixed *fix;
 Button* b;
 Button* b2;
+Gtk::Entry *e;
+//starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     change_to_page1();
 }
+//displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_page1(){
     set_title("Naps");
     override_background_color(Gdk::RGBA("dark green"));
@@ -30,17 +33,29 @@ void Multiple_windows::change_to_page1(){
     show_all_children();
 }
 
+//second page which has entry boxes for signing up for the first time
 void Multiple_windows::change_to_page2(){
     override_background_color(Gdk::RGBA("light blue"));
-    Gtk::Entry *e = Gtk::manage(new Gtk::Entry);;
+    e = Gtk::manage(new Gtk::Entry);
+    Gtk::Label *l = Gtk::manage(new Gtk::Label);
+    l->set_label("Password");
+    fix->put(*l,1920/2-90,1080/2-140);
     fix ->put(*e,1920/2-100,1080/2-100);
+    e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     add(*fix);
     show_all_children();
 
 }
+
+//checks if sign up button is clicked and switches page if it is
 void Multiple_windows::on_sign_up_clicked() {
     // Change to page 2
     change_to_page2();
     fix->remove(*b);
     fix->remove(*b2);
+}
+
+//callback for password input in entry widget
+void Multiple_windows::on_password_entered(){
+    std::cout << e->get_text() << std::endl;
 }

@@ -6,6 +6,8 @@
 #define GOLD_MULTIPLE_WINDOWS_H
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
+#include <gtkmm/entry.h>
+#include <gtkmm/fixed.h>
 #include "Button.h"
 class Multiple_windows : public Gtk:: Window{
 public:
@@ -15,6 +17,8 @@ public:
     void change_to_page2();
 
     void on_sign_up_clicked();
+
+    void on_password_entered();
 };
 
 
