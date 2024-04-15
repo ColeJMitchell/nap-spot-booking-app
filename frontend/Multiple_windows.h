@@ -22,6 +22,8 @@ public:
 
     void on_log_in_clicked();
 
+    void on_back_clicked();
+
     void on_password_entered();
 
     void on_username_entered();

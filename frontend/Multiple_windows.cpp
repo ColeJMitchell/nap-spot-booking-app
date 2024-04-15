@@ -7,13 +7,22 @@
 #include "Button.h"
 #include "Insert.h"
 Gtk::Fixed *fix;
+//signup & login
 Button* b;
 Button* b2;
+//submit
 Button* b3;
+Button* b4;
+//main menu buttons
+Button* b5;
+Button* b6;
+Button* b7;
+//entries for username and password
 Gtk::Entry *e;
 Gtk::Entry *e2;
 std::string username;
 std::string password;
+//login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
 //starts the gui and immediately sets page1
@@ -51,14 +60,17 @@ void Multiple_windows::change_to_signuppage(){
     l2 = Gtk::manage(new Gtk::Label);
     l2->set_label("Username");
     b3 = new Button("Submit",170,100);
+    b4 = new Button("Back",170,100);
     fix->put(*l,1920/2-110,1080/2+60);
     fix->put(*l2,1920/2-110,1080/2-80);
     fix ->put(*e,1920/2-120,1080/2+20);
     fix ->put(*e2,1920/2-120,1080/2-120);
-    fix->put(*b3, 1920/2-120,1080/2+200);
+    fix->put(*b3, 1920/2-190,1080/2+200);
+    fix->put(*b4, 1920/2+20,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
+    b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 
 }
@@ -70,20 +82,33 @@ void Multiple_windows::change_to_loginpage(){
     Gtk::Label *l2 = Gtk::manage(new Gtk::Label);
     l->set_label("Password");
     l2->set_label("Username");
+    b3 = new Button("Submit",170,100);
+    b4 = new Button("Back",170,100);
     fix->put(*l,1920/2-90,1080/2-140);
     fix->put(*l2,1920/2-90,1080/2-240);
     fix ->put(*e,1920/2-100,1080/2-100);
     fix ->put(*e2,1920/2-100,1080/2-200);
+    fix->put(*b3, 1920/2-190,1080/2+200);
+    fix->put(*b4, 1920/2+20,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
+    b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     add(*fix);
     show_all_children();
 }
 
 void Multiple_windows::change_to_home_page(){
     override_background_color(Gdk::RGBA("black"));
+    b5 = new Button("Favorite Nap Spots",440,660);
+    b6 = new Button("Book a Nap Spot",440,660);
+    b7 = new Button("Submit a Location Request",440,660);
+    fix->put(*b5,150,680);
+    fix->put(*b6,740,680);
+    fix ->put(*b7,1330,680);
+    add(*fix);
+    show_all_children();
 }
-
 //checks if sign up button is clicked and switches page if it is
 void Multiple_windows::on_sign_up_clicked() {
     // Change to page 2
@@ -97,6 +122,16 @@ void Multiple_windows::on_log_in_clicked() {
     change_to_loginpage();
     fix->remove(*b);
     fix->remove(*b2);
+}
+
+void Multiple_windows::on_back_clicked() {
+    fix->remove(*e);
+    fix->remove(*e2);
+    fix->remove(*l);
+    fix->remove(*l2);
+    fix->remove(*b3);
+    fix->remove(*b4);
+    change_to_pageopen();
 }
 
 //callback for password input in entry widget
