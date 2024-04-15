@@ -9,25 +9,14 @@
 
 
 //adds a user to the database when they sign up
-void Insert::insert_user(int id, std::string first_name, std::string last_name, std::string email, std::string username, std::string password) {
+void Insert::insert_user(std::string username, std::string password) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO user_information";
-    sql += " ( id, first_name, last_name, email, username, password) ";
-    sql += "VALUES (";
-    sql += std::to_string(id);
-    sql += ", \"";
-    sql += first_name;
-    sql += "\", ";
-    sql += "\"";
-    sql += last_name;
-    sql += "\",";
-    sql += "\"";
-    sql += email;
-    sql += "\",";
-    sql += "\"";
+    sql += " ( username, password) ";
+    sql += "VALUES ( \"";
     sql += username;
     sql += "\",";
     sql += "\"";

@@ -11,6 +11,8 @@
 class Button : public Gtk::Button
 {
 public:
+    Button(Glib::ustring s, int x, int y);
+
     bool log;
     bool sign_up;
     Button();

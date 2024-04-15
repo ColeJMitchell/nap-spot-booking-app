@@ -12,5 +12,7 @@ public:
                                      std::string attribute1, std::string attribute2, std::string attribute3,
                                      int num_people,
                                      std::string description, int reserved);
+
+    void insert_user(std::string username, std::string password);
 };
 #endif //GOLD_INSERT_H

@@ -25,6 +25,8 @@ public:
     void on_password_entered();
 
     void on_username_entered();
+
+    void on_submit();
 };
 
 

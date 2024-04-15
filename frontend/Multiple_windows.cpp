@@ -5,11 +5,17 @@
 #include "Multiple_windows.h"
 #include <gtkmm.h>
 #include "Button.h"
+#include "Insert.h"
 Gtk::Fixed *fix;
 Button* b;
 Button* b2;
+Button* b3;
 Gtk::Entry *e;
 Gtk::Entry *e2;
+std::string username;
+std::string password;
+Gtk::Label *l;
+Gtk::Label *l2;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     change_to_pageopen();
@@ -23,8 +29,8 @@ void Multiple_windows::change_to_pageopen(){
 
     // Allocate memory for the Gtk::Box and Gtk::Button dynamically
     fix = Gtk::manage(new Gtk::Fixed);;
-    b = new Button("Sign Up");
-    b2 = new Button("Log In");
+    b = new Button("Sign Up",250,150);
+    b2 = new Button("Log In",250,150);
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_sign_up_clicked));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_log_in_clicked));
     fix->put(*b,1920/2-550,1080/2-120);
@@ -39,15 +45,23 @@ void Multiple_windows::change_to_pageopen(){
 void Multiple_windows::change_to_signuppage(){
     override_background_color(Gdk::RGBA("light blue"));
     e = Gtk::manage(new Gtk::Entry);
-    Gtk::Label *l = Gtk::manage(new Gtk::Label);
+    e2 = Gtk::manage(new Gtk::Entry);
+    l = Gtk::manage(new Gtk::Label);
     l->set_label("Password");
-    fix->put(*l,1920/2-90,1080/2-140);
-    fix ->put(*e,1920/2-100,1080/2-100);
+    l2 = Gtk::manage(new Gtk::Label);
+    l2->set_label("Username");
+    b3 = new Button("Submit",170,100);
+    fix->put(*l,1920/2-110,1080/2+60);
+    fix->put(*l2,1920/2-110,1080/2-80);
+    fix ->put(*e,1920/2-120,1080/2+20);
+    fix ->put(*e2,1920/2-120,1080/2-120);
+    fix->put(*b3, 1920/2-120,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
-    add(*fix);
+    e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
     show_all_children();
-}
 
+}
 void Multiple_windows::change_to_loginpage(){
     override_background_color(Gdk::RGBA("light blue"));
     e = Gtk::manage(new Gtk::Entry);
@@ -82,10 +96,15 @@ void Multiple_windows::on_log_in_clicked() {
 
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
-    std::cout << e->get_text() << std::endl;
+    password = e->get_text();
+    std::cout<<password;
 }
-
 void Multiple_windows::on_username_entered(){
-    std::cout << e2->get_text() << std::endl;
+    username = e2->get_text();
+    std::cout<<username;
 }
 
+void Multiple_windows::on_submit(){
+    Insert i;
+    i.insert_user(username,password);
+}
