@@ -12,11 +12,15 @@
 class Multiple_windows : public Gtk:: Window{
 public:
     Multiple_windows();
-    void change_to_page1();
+    void change_to_pageopen();
 
-    void change_to_page2();
+    void change_to_signuppage();
+
+    void change_to_loginpage();
 
     void on_sign_up_clicked();
+
+    void on_log_in_clicked();
 
     void on_password_entered();
 
