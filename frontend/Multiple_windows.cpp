@@ -5,6 +5,7 @@
 #include "Multiple_windows.h"
 #include <gtkmm.h>
 #include "Button.h"
+#include "Insert.h"
 Gtk::Fixed *fix;
 Button* b;
 Button* b2;
@@ -56,6 +57,7 @@ void Multiple_windows::change_to_page2(){
     fix->put(*b3, 1920/2-120,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
     show_all_children();
 
 }
@@ -76,4 +78,9 @@ void Multiple_windows::on_password_entered(){
 void Multiple_windows::on_username_entered(){
     username = e2->get_text();
     std::cout<<username;
+}
+
+void Multiple_windows::on_submit(){
+    Insert i;
+    i.insert_user(username,password);
 }

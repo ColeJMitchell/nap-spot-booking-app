@@ -1,8 +1,4 @@
 create table user_information(
-	id int unique not null,
-	first_name varchar(20) not null,
-	last_name varchar(20) not null,
-	email varchar(30) not null,
 	username varchar(50) not null,
 	password varchar(20) not null
 );

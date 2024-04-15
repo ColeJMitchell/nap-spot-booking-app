@@ -13,7 +13,7 @@ protected:
         i1 = new Insert;
         s1 = new Select;
         d1 = new Delete;
-        i1->insert_user(1,"Cole","Mitchell","mitchecj@lafayette.edu","Cedrien","Password");
+        i1->insert_user("Cedrien","Password");
     }
     virtual void TearDown() {
         delete i1;
@@ -26,7 +26,7 @@ protected:
     Delete *d1;
 };
 TEST_F(SelectTest, TESTFIXTURE) {
-    std::vector<std::string> me = {"1","Cole", "Mitchell", "mitchecj@lafayette.edu", "Cedrien", "Password"};
+    std::vector<std::string> me = {"Cedrien", "Password"};
 
     for (int i=0; i<6; i++) {
         ASSERT_EQ(s1->get_one_row_id("user_information",1)[i], me[i]) << "These should match!";
@@ -40,7 +40,7 @@ protected:
         s1 = new Select;
         d1 = new Delete;
         u1 = new Update;
-        i1->insert_user(1,"Cole","Mitchell","mitchecj@lafayette.edu","Cedrien","Password");
+        i1->insert_user("Cedrien","Password");
         u1->update_user_information("Password",1,"Password2");
     }
     virtual void TearDown() {
@@ -55,7 +55,7 @@ protected:
     Delete *d1;
 };
 TEST_F(UpdateTest, TESTFIXTURE) {
-    std::vector<std::string> me = {"1","Cole", "Mitchell", "mitchecj@lafayette.edu", "Cedrien", "Password2"};
+    std::vector<std::string> me = {"Cedrien", "Password2"};
 
     for (int i=0; i<6; i++) {
         ASSERT_EQ(s1->get_one_row_id("user_information",1)[i], me[i]) << "These should match!";
