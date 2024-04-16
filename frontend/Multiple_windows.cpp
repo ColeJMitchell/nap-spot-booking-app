@@ -27,6 +27,8 @@ Gtk::Label *l;
 Gtk::Label *l2;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
+    fix = Gtk::manage(new Gtk::Fixed);
+    add(*fix);
     change_to_pageopen();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
@@ -37,7 +39,7 @@ void Multiple_windows::change_to_pageopen(){
     set_default_size(1920, 1080);
 
     // Allocate memory for the Gtk::Box and Gtk::Button dynamically
-    fix = Gtk::manage(new Gtk::Fixed);;
+    ;
     b = new Button("Sign Up",250,150);
     b2 = new Button("Log In",250,150);
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_sign_up_clicked));
@@ -45,7 +47,6 @@ void Multiple_windows::change_to_pageopen(){
     fix->put(*b,1920/2-550,1080/2-120);
     fix->put(*b2,1920/2+250,1080/2-120);
 
-    add(*fix);
     // Show all widgets
     show_all_children();
 }
@@ -65,8 +66,8 @@ void Multiple_windows::change_to_signuppage(){
     fix->put(*l2,1920/2-110,1080/2-80);
     fix ->put(*e,1920/2-120,1080/2+20);
     fix ->put(*e2,1920/2-120,1080/2-120);
-    fix->put(*b3, 1920/2-190,1080/2+200);
-    fix->put(*b4, 1920/2+20,1080/2+200);
+    fix->put(*b3, 1920/2-400,1080/2+200);
+    fix->put(*b4, 1920/2+150,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
@@ -94,7 +95,6 @@ void Multiple_windows::change_to_loginpage(){
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
-    add(*fix);
     show_all_children();
 }
 
@@ -106,7 +106,6 @@ void Multiple_windows::change_to_home_page(){
     fix->put(*b5,150,680);
     fix->put(*b6,740,680);
     fix ->put(*b7,1330,680);
-    add(*fix);
     show_all_children();
 }
 //checks if sign up button is clicked and switches page if it is
@@ -152,6 +151,7 @@ void Multiple_windows::on_submit(){
     fix->remove(*l);
     fix->remove(*l2);
     fix->remove(*b3);
+    fix->remove(*b4);
     password = "";
     username = "";
     change_to_home_page();
