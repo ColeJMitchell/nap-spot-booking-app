@@ -106,21 +106,61 @@ void Multiple_windows::change_to_home_page(){
     fix->put(*b5,240,400);
     fix->put(*b6,820,400);
     fix ->put(*b7,1420,400);
+    b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_clicked));
+    b6->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_clicked));
+    b7->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_request_clicked));
     show_all_children();
 }
+
+void Multiple_windows::change_to_favorite_page(){
+    override_background_color(Gdk::RGBA("white"));
+    show_all_children();
+}
+
+void Multiple_windows::change_to_book_page(){
+    override_background_color(Gdk::RGBA("white"));
+    show_all_children();
+}
+
+void Multiple_windows::change_to_request_page(){
+    override_background_color(Gdk::RGBA("white"));
+    show_all_children();
+}
+
+void Multiple_windows::on_request_clicked(){
+    fix->remove(*b5);
+    fix->remove(*b6);
+    fix->remove(*b7);
+    change_to_request_page();
+}
+
+void Multiple_windows::on_favorite_clicked(){
+    fix->remove(*b5);
+    fix->remove(*b6);
+    fix->remove(*b7);
+    change_to_favorite_page();
+}
+
+void Multiple_windows::on_book_clicked(){
+    fix->remove(*b5);
+    fix->remove(*b6);
+    fix->remove(*b7);
+    change_to_book_page();
+}
+
 //checks if sign up button is clicked and switches page if it is
 void Multiple_windows::on_sign_up_clicked() {
     // Change to page 2
-    change_to_signuppage();
     fix->remove(*b);
     fix->remove(*b2);
+    change_to_signuppage();
 }
 
 void Multiple_windows::on_log_in_clicked() {
     // Change to page 2
-    change_to_loginpage();
     fix->remove(*b);
     fix->remove(*b2);
+    change_to_loginpage();
 }
 
 void Multiple_windows::on_back_clicked() {
@@ -138,6 +178,7 @@ void Multiple_windows::on_password_entered(){
     password = e->get_text();
     std::cout<<password;
 }
+
 void Multiple_windows::on_username_entered(){
     username = e2->get_text();
     std::cout<<username;

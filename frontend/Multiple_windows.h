@@ -33,6 +33,18 @@ public:
     void change_to_sign_up();
 
     void change_to_home_page();
+
+    void on_favorite_clicked();
+
+    void change_to_favorite_page();
+
+    void on_request_clicked();
+
+    void on_book_clicked();
+
+    void change_to_book_page();
+
+    void change_to_request_page();
 };
 
 
