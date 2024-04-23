@@ -70,9 +70,9 @@ void Multiple_windows::change_to_signuppage(){
     fix ->put(*e2,1920/2-120,1080/2-120);
     fix->put(*b3, 1920/2-400,1080/2+200);
     fix->put(*b4, 1920/2+160,1080/2+200);
-    e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
-    e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
-    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_login));
+    e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
+    e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_signup));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 
@@ -151,9 +151,8 @@ void Multiple_windows::on_username_entered(){
 }
 
 void Multiple_windows::on_submit_login(){
-    Insert i;
     Select s;
-    if(s.determine_if_user_exists("user_information",username, password)!=0) {
+    if(s.determine_if_user_exists("user_information",username, password)!=-1) {
         fix->remove(*e);
         fix->remove(*e2);
         fix->remove(*l);
@@ -166,6 +165,23 @@ void Multiple_windows::on_submit_login(){
     }
 }
 
+void Multiple_windows::on_submit_signup(){
+    Insert i;
+    Select s;
+    if(s.determine_if_user_exists("user_information",username, password)==-1) {
+        int count = s.get_row_count("user_information");
+        i.insert_user(count,username,password,0);
+        fix->remove(*e);
+        fix->remove(*e2);
+        fix->remove(*l);
+        fix->remove(*l2);
+        fix->remove(*b3);
+        fix->remove(*b4);
+        password = "";
+        username = "";
+        change_to_home_page();
+    }
+}
 
 
 void Multiple_windows::on_favorite_clicked(){

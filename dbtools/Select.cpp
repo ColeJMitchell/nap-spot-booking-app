@@ -106,14 +106,18 @@ int Select::determine_if_user_exists(std::string table, std::string username, st
     sql += "\" and password = \"";
     sql += password;
     sql += "\" ;";
-    int result=0;
+    int result=-1;
     retCode = sqlite3_exec(curr_db,
                            sql.c_str(),
                            cb_size,
                            (void *) &result,
                            &zErrMsg);
     if (retCode != SQLITE_OK) {
-        result = -1;
+        std::cerr << sql
+                  << std::endl
+                  << "SQL error: "
+                  << zErrMsg;
+        sqlite3_free(zErrMsg);
     }
     sqlite3_close(curr_db);
     return result;
