@@ -72,7 +72,7 @@ void Multiple_windows::change_to_signuppage(){
     fix->put(*b4, 1920/2+160,1080/2+200);
     e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
-    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_login));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 
@@ -93,9 +93,9 @@ void Multiple_windows::change_to_loginpage(){
     fix ->put(*e2,1920/2-120,1080/2-120);
     fix->put(*b3, 1920/2-400,1080/2+200);
     fix->put(*b4, 1920/2+160,1080/2+200);
-    e->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
-    e2->signal_activate().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
-    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit));
+    e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
+    e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_login));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 }
@@ -144,22 +144,16 @@ void Multiple_windows::on_request_clicked(){
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
     password = e->get_text();
-    std::cout<<password;
 }
 
 void Multiple_windows::on_username_entered(){
     username = e2->get_text();
-    std::cout<<username;
 }
 
-void Multiple_windows::on_submit(){
+void Multiple_windows::on_submit_login(){
     Insert i;
     Select s;
-    int x = s.determine_if_user_exists("user_information",username);
-    std::cout << x;
-    if(s.determine_if_user_exists("user_information",username)!=0) {
-        int count = s.get_row_count("user_information");
-        i.insert_user(count, username, password, 0);
+    if(s.determine_if_user_exists("user_information",username, password)!=0) {
         fix->remove(*e);
         fix->remove(*e2);
         fix->remove(*l);

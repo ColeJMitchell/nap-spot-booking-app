@@ -14,5 +14,7 @@ public:
     static int cb_size(void *data, int argc, char **argv, char **azColName);
 
     int determine_if_user_exists(std::string table, std::string username);
+
+    int determine_if_user_exists(std::string table, std::string username, std::string password);
 };
 #endif //GOLD_SELECT_H

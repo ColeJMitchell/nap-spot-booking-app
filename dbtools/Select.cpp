@@ -93,7 +93,7 @@ int Select::get_row_count(std::string table){
     return result;
 }
 
-int Select::determine_if_user_exists(std::string table, std::string username){
+int Select::determine_if_user_exists(std::string table, std::string username, std::string password){
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
@@ -103,6 +103,8 @@ int Select::determine_if_user_exists(std::string table, std::string username){
     sql += table;
     sql += " WHERE username = \"";
     sql += username;
+    sql += "\" and password = \"";
+    sql += password;
     sql += "\" ;";
     int result=0;
     retCode = sqlite3_exec(curr_db,

@@ -45,6 +45,8 @@ public:
     void change_to_book_page();
 
     void change_to_request_page();
+
+    void on_submit_login();
 };
 
 
