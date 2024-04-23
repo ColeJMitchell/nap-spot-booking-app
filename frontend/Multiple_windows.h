@@ -49,6 +49,8 @@ public:
     void on_submit_login();
 
     void on_submit_signup();
+
+    void on_back_clicked_home();
 };
 
 

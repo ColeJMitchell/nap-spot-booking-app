@@ -102,12 +102,15 @@ void Multiple_windows::change_to_loginpage(){
 
 void Multiple_windows::change_to_home_page(){
     override_background_color(Gdk::RGBA("black"));
+    b4 = new Button("Back to Login",170,100);
     b5 = new Button("Favorite Nap Spots",250,150);
     b6 = new Button("Book a Nap Spot",250,150);
     b7 = new Button("Submit a Location Request",250,150);
     fix->put(*b5,240,400);
     fix->put(*b6,820,400);
+    fix->put(*b4,859, 800);
     fix ->put(*b7,1420,400);
+    b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_home));
     b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_clicked));
     b6->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_clicked));
     b7->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_request_clicked));
@@ -185,6 +188,7 @@ void Multiple_windows::on_submit_signup(){
 
 
 void Multiple_windows::on_favorite_clicked(){
+    fix->remove(*b4);
     fix->remove(*b5);
     fix->remove(*b6);
     fix->remove(*b7);
@@ -192,6 +196,7 @@ void Multiple_windows::on_favorite_clicked(){
 }
 
 void Multiple_windows::on_book_clicked(){
+    fix->remove(*b4);
     fix->remove(*b5);
     fix->remove(*b6);
     fix->remove(*b7);
@@ -221,4 +226,12 @@ void Multiple_windows::on_back_clicked() {
     fix->remove(*b3);
     fix->remove(*b4);
     change_to_pageopen();
+}
+
+void Multiple_windows::on_back_clicked_home(){
+    fix->remove(*b4);
+    fix->remove(*b5);
+    fix->remove(*b6);
+    fix->remove(*b7);
+    change_to_loginpage();
 }
