@@ -31,3 +31,6 @@ create table favorites_list(
     reserved int null
 );
 .separator ","
+.mode csv
+.import "CSV/users.csv" user_information
+.import "CSV/nap_spots.csv" nap_spots

@@ -101,7 +101,7 @@ void Multiple_windows::change_to_loginpage(){
 }
 
 void Multiple_windows::change_to_home_page(){
-    override_background_color(Gdk::RGBA("black"));
+    override_background_color(Gdk::RGBA("salmon"));
     b4 = new Button("Back to Login",170,100);
     b5 = new Button("Favorite Nap Spots",250,150);
     b6 = new Button("Book a Nap Spot",250,150);
