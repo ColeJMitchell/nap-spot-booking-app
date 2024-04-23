@@ -91,5 +91,30 @@ int Select::get_row_count(std::string table){
     }
     sqlite3_close(curr_db);
     return result;
+}
+
+int Select::determine_if_user_exists(std::string table, std::string username){
+    sqlite3 *curr_db;
+    int rc = sqlite3_open("../database/database.sqlite", &curr_db);
+    int retCode = 0;
+    char *zErrMsg = 0;
+    std::string sql = "SELECT user_id";
+    sql += " FROM ";
+    sql += table;
+    sql += " WHERE username = \"";
+    sql += username;
+    sql += "\" ;";
+    int result=0;
+    retCode = sqlite3_exec(curr_db,
+                           sql.c_str(),
+                           cb_size,
+                           (void *) &result,
+                           &zErrMsg);
+    if (retCode != SQLITE_OK) {
+        result = -1;
+    }
+    sqlite3_close(curr_db);
+    return result;
+
 
 }

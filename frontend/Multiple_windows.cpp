@@ -6,6 +6,7 @@
 #include <gtkmm.h>
 #include "Button.h"
 #include "Insert.h"
+#include "Select.h"
 Gtk::Fixed *fix;
 //signup & login
 Button* b;
@@ -153,16 +154,22 @@ void Multiple_windows::on_username_entered(){
 
 void Multiple_windows::on_submit(){
     Insert i;
-    i.insert_user(username,password);
-    fix->remove(*e);
-    fix->remove(*e2);
-    fix->remove(*l);
-    fix->remove(*l2);
-    fix->remove(*b3);
-    fix->remove(*b4);
-    password = "";
-    username = "";
-    change_to_home_page();
+    Select s;
+    int x = s.determine_if_user_exists("user_information",username);
+    std::cout << x;
+    if(s.determine_if_user_exists("user_information",username)!=0) {
+        int count = s.get_row_count("user_information");
+        i.insert_user(count, username, password, 0);
+        fix->remove(*e);
+        fix->remove(*e2);
+        fix->remove(*l);
+        fix->remove(*l2);
+        fix->remove(*b3);
+        fix->remove(*b4);
+        password = "";
+        username = "";
+        change_to_home_page();
+    }
 }
 
 

@@ -14,5 +14,7 @@ public:
                                      std::string description, int reserved);
 
     void insert_user(int user_id, std::string username, std::string password);
+
+    void insert_user(int user_id, std::string username, std::string password, int privledge);
 };
 #endif //GOLD_INSERT_H

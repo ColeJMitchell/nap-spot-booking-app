@@ -1,7 +1,8 @@
 create table user_information(
-    int user_id,
+    user_id int,
 	username varchar(50) not null,
-	password varchar(20) not null
+	password varchar(20) not null,
+	privledge int
 );
 
 create table nap_spots(

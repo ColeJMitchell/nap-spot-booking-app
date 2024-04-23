@@ -12,5 +12,7 @@ public:
     int get_row_count(std::string table);
 
     static int cb_size(void *data, int argc, char **argv, char **azColName);
+
+    int determine_if_user_exists(std::string table, std::string username);
 };
 #endif //GOLD_SELECT_H
