@@ -13,6 +13,6 @@ public:
                                      int num_people,
                                      std::string description, int reserved);
 
-    void insert_user(std::string username, std::string password);
+    void insert_user(int user_id, std::string username, std::string password);
 };
 #endif //GOLD_INSERT_H

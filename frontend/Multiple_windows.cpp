@@ -51,6 +51,7 @@ void Multiple_windows::change_to_pageopen(){
     show_all_children();
 }
 
+
 //second page which has entry boxes for signing up for the first time
 void Multiple_windows::change_to_signuppage(){
     override_background_color(Gdk::RGBA("light blue"));
@@ -127,12 +128,44 @@ void Multiple_windows::change_to_request_page(){
     show_all_children();
 }
 
+
+
+
 void Multiple_windows::on_request_clicked(){
     fix->remove(*b5);
     fix->remove(*b6);
     fix->remove(*b7);
     change_to_request_page();
 }
+
+
+
+//callback for password input in entry widget
+void Multiple_windows::on_password_entered(){
+    password = e->get_text();
+    std::cout<<password;
+}
+
+void Multiple_windows::on_username_entered(){
+    username = e2->get_text();
+    std::cout<<username;
+}
+
+void Multiple_windows::on_submit(){
+    Insert i;
+    i.insert_user(username,password);
+    fix->remove(*e);
+    fix->remove(*e2);
+    fix->remove(*l);
+    fix->remove(*l2);
+    fix->remove(*b3);
+    fix->remove(*b4);
+    password = "";
+    username = "";
+    change_to_home_page();
+}
+
+
 
 void Multiple_windows::on_favorite_clicked(){
     fix->remove(*b5);
@@ -171,29 +204,4 @@ void Multiple_windows::on_back_clicked() {
     fix->remove(*b3);
     fix->remove(*b4);
     change_to_pageopen();
-}
-
-//callback for password input in entry widget
-void Multiple_windows::on_password_entered(){
-    password = e->get_text();
-    std::cout<<password;
-}
-
-void Multiple_windows::on_username_entered(){
-    username = e2->get_text();
-    std::cout<<username;
-}
-
-void Multiple_windows::on_submit(){
-    Insert i;
-    i.insert_user(username,password);
-    fix->remove(*e);
-    fix->remove(*e2);
-    fix->remove(*l);
-    fix->remove(*l2);
-    fix->remove(*b3);
-    fix->remove(*b4);
-    password = "";
-    username = "";
-    change_to_home_page();
 }

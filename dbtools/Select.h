@@ -8,5 +8,9 @@ class Select{
 public:
     static int cb_select_row(void *data, int argc, char **argv, char **azColName);
     std::vector<std::string> get_one_row_id(std::string table, int id);
+
+    int get_row_count(std::string table);
+
+    static int cb_size(void *data, int argc, char **argv, char **azColName);
 };
 #endif //GOLD_SELECT_H

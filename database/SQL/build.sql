@@ -1,4 +1,5 @@
 create table user_information(
+    int user_id,
 	username varchar(50) not null,
 	password varchar(20) not null
 );
