@@ -124,6 +124,14 @@ void Multiple_windows::change_to_favorite_page(){
 
 void Multiple_windows::change_to_book_page(){
     override_background_color(Gdk::RGBA("white"));
+    set_border_width(10);
+    set_default_size(1920, 1080);
+    l = Gtk::manage(new Gtk::Label);
+    l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
+    fix->put(*l,720,20);
+    Gtk::Scrollbar *s = Gtk::manage(new Gtk::Scrollbar);
+    s->set_size_request(100, 2000);
+    fix->put(*s,0,0);
     show_all_children();
 }
 
