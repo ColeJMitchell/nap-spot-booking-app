@@ -125,6 +125,7 @@ void Multiple_windows::change_to_favorite_page(){
 }
 
 void Multiple_windows::change_to_book_page(){
+    Select s;
     override_background_color(Gdk::RGBA("white"));
     set_border_width(10);
     set_default_size(1920, 1080);
@@ -139,11 +140,12 @@ void Multiple_windows::change_to_book_page(){
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,720,20);
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
-    add_nap_spot_frame();
-    add_nap_spot_frame();
+    for(int i=0; i<s.get_row_count("nap_spots"); i++){
+        std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
+    }
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 400,200+offset);
-        offset+=100;
+        fix->put(*f2, 850,200+offset);
+        offset+=150;
     }
     show_all_children();
 }
@@ -276,7 +278,7 @@ void Multiple_windows::on_scroll_down_clicked(){
 }
 
 
-void Multiple_windows::add_nap_spot_frame(){
+void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
     frame->set_size_request(200, 150);
 

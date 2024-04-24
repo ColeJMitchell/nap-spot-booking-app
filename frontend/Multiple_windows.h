@@ -58,7 +58,8 @@ public:
 
     void on_back_clicked_book();
 
-    void add_nap_spot_frame();
+
+    void add_nap_spot_frame(std::vector<std::string> s);
 };
 
 
