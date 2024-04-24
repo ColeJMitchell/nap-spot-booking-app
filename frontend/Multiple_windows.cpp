@@ -146,7 +146,7 @@ void Multiple_windows::change_to_book_page(){
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 743,150+offset);
-        offset+=200;
+        offset+=400;
     }
     show_all_children();
 }
@@ -281,7 +281,7 @@ void Multiple_windows::on_scroll_down_clicked(){
 
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
-    frame->set_size_request(400, 150);
+    frame->set_size_request(400, 300);
 
     Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
     std::string ID = "Nap Spot ID: " + s[0];
@@ -300,12 +300,15 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     label4->set_markup("<span size='large'>" + Attribute2 + "</span>");
     Gtk::Label* label5 = Gtk::manage(new Gtk::Label());
     label5->set_markup("<span size='large'>" + Attribute3 + "</span>");
-
+    Glib::RefPtr<Gdk::Pixbuf> p = Gdk::Pixbuf::create_from_file(s[5]);
+    Glib::RefPtr<Gdk::Pixbuf> rp = p->scale_simple(200, 200, Gdk::INTERP_BILINEAR);
+    Gtk::Image* image = Gtk::manage(new Gtk::Image(rp));
     vertical_box->pack_start(*label1);
     vertical_box->pack_start(*label2);
     vertical_box->pack_start(*label3);
     vertical_box->pack_start(*label4);
     vertical_box->pack_start(*label5);
+    vertical_box->pack_start(*image);
     frame->add(*vertical_box);
     f->push_back(frame);
 
