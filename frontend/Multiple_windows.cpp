@@ -145,7 +145,7 @@ void Multiple_windows::change_to_book_page(){
         add_nap_spot_frame(s2);
     }
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 785,150+offset);
+        fix->put(*f2, 743,150+offset);
         offset+=200;
     }
     show_all_children();
@@ -281,16 +281,31 @@ void Multiple_windows::on_scroll_down_clicked(){
 
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
-    frame->set_size_request(300, 150);
+    frame->set_size_request(400, 150);
 
     Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
+    std::string ID = "Nap Spot ID: " + s[0];
+    std::string Name = "Nap Spot Name: " + s[1].substr(1, s[1].size() - 2);
+    std::string Attribute1 = "Attribute 1: " + s[2].substr(1, s[2].size() - 2);
+    std::string Attribute2 = "Attribute 2: " + s[3].substr(1, s[3].size() - 2);
+    std::string Attribute3 = "Attribute 3: " + s[4].substr(1, s[4].size() - 2);
 
-    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Nap Spot ID: "+s[0]));
-    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Nap Spot Name: "+s[1]));
-    Gtk::Label* label3 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    Gtk::Label* label1 = Gtk::manage(new Gtk::Label());
+    label1->set_markup("<b><span size='large'>" + ID + "</span></b>");
+    Gtk::Label* label2 = Gtk::manage(new Gtk::Label());
+    label2->set_markup("<span size='large'>" + Name + "</span>");
+    Gtk::Label* label3 = Gtk::manage(new Gtk::Label());
+    label3->set_markup("<span size='large'>" + Attribute1 + "</span>");
+    Gtk::Label* label4 = Gtk::manage(new Gtk::Label());
+    label4->set_markup("<span size='large'>" + Attribute2 + "</span>");
+    Gtk::Label* label5 = Gtk::manage(new Gtk::Label());
+    label5->set_markup("<span size='large'>" + Attribute3 + "</span>");
+
     vertical_box->pack_start(*label1);
     vertical_box->pack_start(*label2);
     vertical_box->pack_start(*label3);
+    vertical_box->pack_start(*label4);
+    vertical_box->pack_start(*label5);
     frame->add(*vertical_box);
     f->push_back(frame);
 
