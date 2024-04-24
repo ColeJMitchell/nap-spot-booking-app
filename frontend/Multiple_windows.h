@@ -51,6 +51,14 @@ public:
     void on_submit_signup();
 
     void on_back_clicked_home();
+
+    void on_scroll_up_clicked();
+
+    void on_scroll_down_clicked();
+
+    void on_back_clicked_book();
+
+    void add_nap_spot_frame();
 };
 
 

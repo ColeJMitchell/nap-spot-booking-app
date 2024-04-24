@@ -26,12 +26,13 @@ std::string password;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
-std::vector<Gtk::Frame> *f;
+std::vector<Gtk::Frame*> *f;
+int offset = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     fix = Gtk::manage(new Gtk::Fixed);
     add(*fix);
-    change_to_pageopen();
+    change_to_book_page();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_pageopen(){
@@ -127,22 +128,23 @@ void Multiple_windows::change_to_book_page(){
     override_background_color(Gdk::RGBA("white"));
     set_border_width(10);
     set_default_size(1920, 1080);
+    b = new Button("Scroll up",170,100);
+    b2 = new Button("Scroll down",170,100);
+    b3 = new Button("Back to Home Page",170,100);
+    f = new std::vector<Gtk::Frame*>();
+    fix->put(*b , 100,350);
+    fix->put(*b2, 100, 450);
+    fix->put(*b3, 100, 150);
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,720,20);
-    Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
-    frame->set_size_request(200, 150);
-
-    Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
-
-    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Attribute 1"));
-    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Attribute 2"));
-    Gtk::Label* label3 = Gtk::manage(new Gtk::Label("Attribute 2"));
-    vertical_box->pack_start(*label1);
-    vertical_box->pack_start(*label2);
-    vertical_box->pack_start(*label3);
-    frame->add(*vertical_box);
-    fix->put(*frame, 100, 100);
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
+    add_nap_spot_frame();
+    add_nap_spot_frame();
+    for(Gtk::Frame *f2 : *f){
+        fix->put(*f2, 400,200+offset);
+        offset+=100;
+    }
     show_all_children();
 }
 
@@ -253,4 +255,41 @@ void Multiple_windows::on_back_clicked_home(){
     fix->remove(*b6);
     fix->remove(*b7);
     change_to_loginpage();
+}
+
+void Multiple_windows::on_back_clicked_book(){
+    fix->remove(*b);
+    fix->remove(*b2);
+    fix->remove(*b3);
+    fix->remove(*l);
+    change_to_home_page();
+}
+
+void Multiple_windows::on_scroll_up_clicked(){
+
+
+}
+
+void Multiple_windows::on_scroll_down_clicked(){
+
+
+}
+
+
+void Multiple_windows::add_nap_spot_frame(){
+    Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
+    frame->set_size_request(200, 150);
+
+    Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
+
+    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Attribute 1"));
+    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    Gtk::Label* label3 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    vertical_box->pack_start(*label1);
+    vertical_box->pack_start(*label2);
+    vertical_box->pack_start(*label3);
+    frame->add(*vertical_box);
+    f->push_back(frame);
+
+
 }
