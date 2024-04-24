@@ -31,11 +31,12 @@ int offset = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     fix = Gtk::manage(new Gtk::Fixed);
+    f = new std::vector<Gtk::Frame*>();
     add(*fix);
-    change_to_book_page();
+    change_to_page_open();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
-void Multiple_windows::change_to_pageopen(){
+void Multiple_windows::change_to_page_open(){
     set_title("Naps");
     override_background_color(Gdk::RGBA("dark green"));
     set_border_width(10);
@@ -132,7 +133,6 @@ void Multiple_windows::change_to_book_page(){
     b = new Button("Scroll up",170,100);
     b2 = new Button("Scroll down",170,100);
     b3 = new Button("Back to Home Page",170,100);
-    f = new std::vector<Gtk::Frame*>();
     fix->put(*b , 100,350);
     fix->put(*b2, 100, 450);
     fix->put(*b3, 100, 150);
@@ -249,7 +249,7 @@ void Multiple_windows::on_back_clicked() {
     fix->remove(*l2);
     fix->remove(*b3);
     fix->remove(*b4);
-    change_to_pageopen();
+    change_to_page_open();
 }
 
 void Multiple_windows::on_back_clicked_home(){
@@ -265,6 +265,11 @@ void Multiple_windows::on_back_clicked_book(){
     fix->remove(*b2);
     fix->remove(*b3);
     fix->remove(*l);
+    for(Gtk::Frame *f2 : *f){
+        fix->remove(*f2);
+    }
+    f->clear();
+    offset = 0;
     change_to_home_page();
 }
 
@@ -277,6 +282,8 @@ void Multiple_windows::on_scroll_down_clicked(){
 
 
 }
+
+
 
 
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
@@ -311,6 +318,4 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     vertical_box->pack_start(*image);
     frame->add(*vertical_box);
     f->push_back(frame);
-
-
 }
