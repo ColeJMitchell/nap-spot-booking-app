@@ -61,6 +61,7 @@ void Multiple_windows::change_to_signuppage(){
     override_background_color(Gdk::RGBA("light blue"));
     e = Gtk::manage(new Gtk::Entry);
     e2 = Gtk::manage(new Gtk::Entry);
+    e->set_visibility(false);
     l = Gtk::manage(new Gtk::Label);
     l->set_label("Password");
     l2 = Gtk::manage(new Gtk::Label);
@@ -84,6 +85,7 @@ void Multiple_windows::change_to_loginpage(){
     override_background_color(Gdk::RGBA("orange"));
     e = Gtk::manage(new Gtk::Entry);
     e2 = Gtk::manage(new Gtk::Entry);
+    e->set_visibility(false);
     l = Gtk::manage(new Gtk::Label);
     l->set_label("Password");
     l2 = Gtk::manage(new Gtk::Label);
