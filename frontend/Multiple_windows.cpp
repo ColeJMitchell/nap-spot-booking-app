@@ -26,6 +26,7 @@ std::string password;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
+std::vector<Gtk::Frame> *f;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     fix = Gtk::manage(new Gtk::Fixed);
