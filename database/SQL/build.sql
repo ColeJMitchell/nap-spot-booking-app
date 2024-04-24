@@ -11,7 +11,6 @@ create table nap_spots(
 	attribute_1 varchar(10),
 	attribute_2 varchar(10),
 	attribute_3 varchar(10),
-	description varchar(100),
 	image varchar(100)
 );
 

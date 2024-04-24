@@ -138,14 +138,15 @@ void Multiple_windows::change_to_book_page(){
     fix->put(*b3, 100, 150);
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
-    fix->put(*l,720,20);
+    fix->put(*l,725,20);
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
+        add_nap_spot_frame(s2);
     }
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 850,200+offset);
-        offset+=150;
+        fix->put(*f2, 785,150+offset);
+        offset+=200;
     }
     show_all_children();
 }
@@ -280,12 +281,12 @@ void Multiple_windows::on_scroll_down_clicked(){
 
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
-    frame->set_size_request(200, 150);
+    frame->set_size_request(300, 150);
 
     Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
 
-    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Attribute 1"));
-    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Nap Spot ID: "+s[0]));
+    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Nap Spot Name: "+s[1]));
     Gtk::Label* label3 = Gtk::manage(new Gtk::Label("Attribute 2"));
     vertical_box->pack_start(*label1);
     vertical_box->pack_start(*label2);
