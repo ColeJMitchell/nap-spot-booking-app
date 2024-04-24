@@ -129,9 +129,19 @@ void Multiple_windows::change_to_book_page(){
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,720,20);
-    Gtk::Scrollbar *s = Gtk::manage(new Gtk::Scrollbar);
-    s->set_size_request(100, 2000);
-    fix->put(*s,0,0);
+    Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
+    frame->set_size_request(200, 150);
+
+    Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
+
+    Gtk::Label* label1 = Gtk::manage(new Gtk::Label("Attribute 1"));
+    Gtk::Label* label2 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    Gtk::Label* label3 = Gtk::manage(new Gtk::Label("Attribute 2"));
+    vertical_box->pack_start(*label1);
+    vertical_box->pack_start(*label2);
+    vertical_box->pack_start(*label3);
+    frame->add(*vertical_box);
+    fix->put(*frame, 100, 100);
     show_all_children();
 }
 
