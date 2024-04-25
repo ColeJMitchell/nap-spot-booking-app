@@ -292,7 +292,15 @@ void Multiple_windows::on_back_clicked_book(){
     fix->remove(*b);
     fix->remove(*b2);
     fix->remove(*b3);
+    fix->remove(*b4);
+    fix->remove(*b5);
+    fix->remove(*e);
+    fix->remove(*e2);
+    fix->remove(*e3);
     fix->remove(*l);
+    fix->remove(*l3);
+    fix->remove(*l4);
+    fix->remove(*l5);
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
     }
