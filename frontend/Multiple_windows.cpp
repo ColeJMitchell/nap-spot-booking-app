@@ -21,11 +21,15 @@ Button* b7;
 //entries for username and password
 Gtk::Entry *e;
 Gtk::Entry *e2;
+Gtk::Entry *e3;
 std::string username;
 std::string password;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
+Gtk::Label *l3;
+Gtk::Label *l4;
+Gtk::Label *l5;
 std::vector<Gtk::Frame*> *f;
 int offset = 0;
 //starts the gui and immediately sets page1
@@ -135,9 +139,28 @@ void Multiple_windows::change_to_book_page(){
     b = new Button("Scroll up",170,100);
     b2 = new Button("Scroll down",170,100);
     b3 = new Button("Back to Home Page",170,100);
-    fix->put(*b , 100,350);
-    fix->put(*b2, 100, 450);
-    fix->put(*b3, 100, 150);
+    b4 = new Button("Book",170,100);
+    b5 = new Button("Favorite",170,100);
+    e = Gtk::manage(new Gtk::Entry);
+    e2 = Gtk::manage(new Gtk::Entry);
+    e3 = Gtk::manage(new Gtk::Entry);
+    l3 = Gtk::manage(new Gtk::Label);
+    l4 = Gtk::manage(new Gtk::Label);
+    l5 = Gtk::manage(new Gtk::Label);
+    l3->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Book:</b></span>");
+    l4->set_markup("<span size = '14000'><b>Enter Number of Minutes:</b></span>");
+    l5->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Favorite:</b></span>");
+    fix->put(*e ,1350,200);
+    fix->put(*l3 ,1350,160);
+    fix->put(*e2 ,1350,300);
+    fix->put(*e3 ,1350,570);
+    fix->put(*b5 ,1350,640);
+    fix->put(*b4 ,1350,370);
+    fix->put(*l5 ,1350,530);
+    fix->put(*l4 ,1350,260);
+    fix->put(*b , 200,350);
+    fix->put(*b2, 200, 450);
+    fix->put(*b3, 200, 150);
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,725,20);
@@ -150,6 +173,7 @@ void Multiple_windows::change_to_book_page(){
         fix->put(*f2, 664,150+offset);
         offset+=600;
     }
+
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked));
     show_all_children();
