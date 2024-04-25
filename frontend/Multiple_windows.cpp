@@ -204,38 +204,35 @@ void Multiple_windows::on_request_clicked(){
 
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
-    try{
         password = e->get_text();
-    }
-    catch(const std::exception& e){
-
-    }
 }
 
 void Multiple_windows::on_username_entered(){
-    try{
-        username = e2->get_text();
-    }
-    catch(const std::exception& e){
-
-    }
+    username = e2->get_text();
 }
 
 void Multiple_windows::on_book_id_entered(){
     try {
         book_id = std::stoi(e->get_text());
-    }
-    catch(const std::exception& e){
-
+    } catch(const std::exception& e){
+        book_id = -1;
     }
 }
 
 void Multiple_windows::on_minutes_entered(){
-    num_minutes = std::stoi(e2->get_text());
+    try {
+        num_minutes = std::stoi(e2->get_text());
+    } catch(const std::exception& e){
+        num_minutes = -1;
+    }
 }
 
 void Multiple_windows::on_favorite_id_entered(){
-    favorite_id = std::stoi(e3->get_text());
+    try {
+        favorite_id = std::stoi(e3->get_text());
+    } catch(const std::exception& e){
+        favorite_id = -1;
+    }
 }
 
 
