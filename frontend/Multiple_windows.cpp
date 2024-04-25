@@ -33,12 +33,20 @@ Gtk::Label *l2;
 Gtk::Label *l3;
 Gtk::Label *l4;
 Gtk::Label *l5;
+Gtk::Label *l6;
+Gtk::Label *l7;
 std::vector<Gtk::Frame*> *f;
+std::vector<std::string> *available;
 int offset = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
+    Select s;
     fix = Gtk::manage(new Gtk::Fixed);
     f = new std::vector<Gtk::Frame*>();
+    available = new std::vector<std::string>();
+    for(int i=0; i<s.get_row_count("nap_spots"); i++){
+        available->push_back("Open");
+    }
     add(*fix);
     change_to_book_page();
 }
@@ -168,9 +176,10 @@ void Multiple_windows::change_to_book_page(){
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,725,20);
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
+    b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2);
+        add_nap_spot_frame(s2, i);
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset);
@@ -319,6 +328,7 @@ void Multiple_windows::on_back_clicked_home(){
     change_to_loginpage();
 }
 
+int offset2 = 0;
 void Multiple_windows::on_back_clicked_book(){
     fix->remove(*b);
     fix->remove(*b2);
@@ -337,9 +347,10 @@ void Multiple_windows::on_back_clicked_book(){
     }
     f->clear();
     offset = 0;
+    offset2 = 0;
     change_to_home_page();
 }
-int offset2 = 0;
+
 void Multiple_windows::on_scroll_up_clicked(){
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
@@ -376,19 +387,44 @@ void Multiple_windows::on_scroll_down_clicked(){
     show_all_children();
 }
 
+void Multiple_windows::on_book_nap_spot_clicked(){
+    Select s;
+    if(book_id == -1 || num_minutes == -1){
+        return;
+    }
+    else{
+        available->at(book_id) = "Reserved";
+    }
+    for(Gtk::Frame *f2 : *f){
+        fix->remove(*f2);
+    }
+    f->clear();
+    offset = 0;
+    for(int i=0; i<s.get_row_count("nap_spots"); i++){
+        std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
+        add_nap_spot_frame(s2, i);
+    }
+    for(Gtk::Frame *f2 : *f){
+        fix->put(*f2, 664,150+offset+offset2);
+        offset+=600;
+    }
+    e->set_text("");
+    e2->set_text("");
+    show_all_children();
+}
 
 
-
-void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
+void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
     frame->set_size_request(550, 500);
 
-    Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
+    Gtk::Box* box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
     std::string ID = "Nap Spot ID: " + s[0];
     std::string Name = "Nap Spot Name: " + s[1].substr(1, s[1].size() - 2);
     std::string Attribute1 = "Attribute 1: " + s[2].substr(1, s[2].size() - 2);
     std::string Attribute2 = "Attribute 2: " + s[3].substr(1, s[3].size() - 2);
     std::string Attribute3 = "Attribute 3: " + s[4].substr(1, s[4].size() - 2);
+    std::string Availibility = "Availibility Status: " + available->at(i);
 
     Gtk::Label* label1 = Gtk::manage(new Gtk::Label());
     label1->set_markup("<b><span size='large'>" + ID + "</span></b>");
@@ -400,15 +436,19 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     label4->set_markup("<span size='large'>" + Attribute2 + "</span>");
     Gtk::Label* label5 = Gtk::manage(new Gtk::Label());
     label5->set_markup("<span size='large'>" + Attribute3 + "</span>");
+    Gtk::Label* label6 = Gtk::manage(new Gtk::Label());
+    label6->set_markup("<span size='large'>" + Availibility + "</span>");
+
     Glib::RefPtr<Gdk::Pixbuf> p = Gdk::Pixbuf::create_from_file(s[5]);
     Glib::RefPtr<Gdk::Pixbuf> rp = p->scale_simple(400, 400, Gdk::INTERP_BILINEAR);
     Gtk::Image* image = Gtk::manage(new Gtk::Image(rp));
-    vertical_box->pack_start(*label1);
-    vertical_box->pack_start(*label2);
-    vertical_box->pack_start(*label3);
-    vertical_box->pack_start(*label4);
-    vertical_box->pack_start(*label5);
-    vertical_box->pack_start(*image);
-    frame->add(*vertical_box);
+    box->pack_start(*label1);
+    box->pack_start(*label6);
+    box->pack_start(*label2);
+    box->pack_start(*label3);
+    box->pack_start(*label4);
+    box->pack_start(*label5);
+    box->pack_start(*image);
+    frame->add(*box);
     f->push_back(frame);
 }
