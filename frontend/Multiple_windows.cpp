@@ -147,8 +147,8 @@ void Multiple_windows::change_to_book_page(){
         add_nap_spot_frame(s2);
     }
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 743,150+offset);
-        offset+=400;
+        fix->put(*f2, 664,150+offset);
+        offset+=600;
     }
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked));
@@ -287,8 +287,8 @@ void Multiple_windows::on_scroll_up_clicked(){
         offset2 += 200;
     }
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 743,150+offset+offset2);
-        offset+=400;
+        fix->put(*f2, 664,150+offset+offset2);
+        offset+=600;
     }
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
@@ -304,8 +304,8 @@ void Multiple_windows::on_scroll_down_clicked(){
     fix->remove(*l);
     offset2 -= 200;
     for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 743,150+offset+offset2);
-        offset+=400;
+        fix->put(*f2, 664,150+offset+offset2);
+        offset+=600;
     }
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
@@ -318,7 +318,7 @@ void Multiple_windows::on_scroll_down_clicked(){
 
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
-    frame->set_size_request(400, 300);
+    frame->set_size_request(550, 500);
 
     Gtk::Box* vertical_box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
     std::string ID = "Nap Spot ID: " + s[0];
@@ -338,7 +338,7 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s){
     Gtk::Label* label5 = Gtk::manage(new Gtk::Label());
     label5->set_markup("<span size='large'>" + Attribute3 + "</span>");
     Glib::RefPtr<Gdk::Pixbuf> p = Gdk::Pixbuf::create_from_file(s[5]);
-    Glib::RefPtr<Gdk::Pixbuf> rp = p->scale_simple(200, 200, Gdk::INTERP_BILINEAR);
+    Glib::RefPtr<Gdk::Pixbuf> rp = p->scale_simple(400, 400, Gdk::INTERP_BILINEAR);
     Gtk::Image* image = Gtk::manage(new Gtk::Image(rp));
     vertical_box->pack_start(*label1);
     vertical_box->pack_start(*label2);
