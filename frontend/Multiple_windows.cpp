@@ -94,8 +94,8 @@ void Multiple_windows::change_to_signuppage(){
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_signup));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
-
 }
+
 void Multiple_windows::change_to_loginpage(){
     override_background_color(Gdk::RGBA("orange"));
     e = Gtk::manage(new Gtk::Entry);
@@ -410,6 +410,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
     }
     e->set_text("");
     e2->set_text("");
+
     show_all_children();
 }
 
