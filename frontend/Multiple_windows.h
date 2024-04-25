@@ -60,6 +60,12 @@ public:
 
 
     void add_nap_spot_frame(std::vector<std::string> s);
+
+    void on_book_id_entered();
+
+    void on_minutes_entered();
+
+    void on_favorite_id_entered();
 };
 
 

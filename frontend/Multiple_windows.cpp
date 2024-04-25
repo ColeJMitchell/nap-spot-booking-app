@@ -24,6 +24,9 @@ Gtk::Entry *e2;
 Gtk::Entry *e3;
 std::string username;
 std::string password;
+int book_id;
+int num_minutes;
+int favorite_id;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
@@ -174,6 +177,9 @@ void Multiple_windows::change_to_book_page(){
         offset+=600;
     }
 
+    e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_id_entered));
+    e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_minutes_entered));
+    e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_id_entered));
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked));
     show_all_children();
@@ -198,12 +204,40 @@ void Multiple_windows::on_request_clicked(){
 
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
-    password = e->get_text();
+    try{
+        password = e->get_text();
+    }
+    catch(const std::exception& e){
+
+    }
 }
 
 void Multiple_windows::on_username_entered(){
-    username = e2->get_text();
+    try{
+        username = e2->get_text();
+    }
+    catch(const std::exception& e){
+
+    }
 }
+
+void Multiple_windows::on_book_id_entered(){
+    try {
+        book_id = std::stoi(e->get_text());
+    }
+    catch(const std::exception& e){
+
+    }
+}
+
+void Multiple_windows::on_minutes_entered(){
+    num_minutes = std::stoi(e2->get_text());
+}
+
+void Multiple_windows::on_favorite_id_entered(){
+    favorite_id = std::stoi(e3->get_text());
+}
+
 
 void Multiple_windows::on_submit_login(){
     Select s;
