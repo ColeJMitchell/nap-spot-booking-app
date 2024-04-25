@@ -4,6 +4,7 @@
 
 #include "Multiple_windows.h"
 #include <gtkmm.h>
+#include <thread>
 #include "Button.h"
 #include "Insert.h"
 #include "Select.h"
@@ -35,6 +36,7 @@ Gtk::Label *l4;
 Gtk::Label *l5;
 Gtk::Label *l6;
 Gtk::Label *l7;
+bool is_book_page;
 std::vector<Gtk::Frame*> *f;
 std::vector<std::string> *available;
 int offset = 0;
@@ -143,6 +145,7 @@ void Multiple_windows::change_to_favorite_page(){
 }
 
 void Multiple_windows::change_to_book_page(){
+    is_book_page = true;
     Select s;
     override_background_color(Gdk::RGBA("white"));
     set_border_width(10);
@@ -348,6 +351,7 @@ void Multiple_windows::on_back_clicked_book(){
     f->clear();
     offset = 0;
     offset2 = 0;
+    is_book_page = false;
     change_to_home_page();
 }
 
@@ -387,7 +391,41 @@ void Multiple_windows::on_scroll_down_clicked(){
     show_all_children();
 }
 
+int temp_num;
+int temp_id;
+void Multiple_windows::countdown() {
+
+    Select s;
+    int num = temp_num;
+    int id = temp_id;
+    while (num > 0) {
+        std::cout << num;
+        std::this_thread::sleep_for(std::chrono::minutes(1));
+        num--;
+    }
+    available->at(id) = "Open";
+    if(is_book_page){
+    for(Gtk::Frame *f2 : *f){
+        fix->remove(*f2);
+    }
+    f->clear();
+    offset = 0;
+    for(int i=0; i<s.get_row_count("nap_spots"); i++){
+        std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
+        add_nap_spot_frame(s2, i);
+    }
+    for(Gtk::Frame *f2 : *f){
+        fix->put(*f2, 664,150+offset+offset2);
+        offset+=600;
+    }
+    show_all_children();
+    }
+
+}
+
 void Multiple_windows::on_book_nap_spot_clicked(){
+    temp_num = num_minutes;
+    temp_id = book_id;
     Select s;
     if(book_id == -1 || num_minutes == -1){
         return;
@@ -410,7 +448,12 @@ void Multiple_windows::on_book_nap_spot_clicked(){
     }
     e->set_text("");
     e2->set_text("");
+    try {
+        std::thread countdown_thread(&Multiple_windows::countdown,this);
+        countdown_thread.detach();
+    } catch (const std::exception& e) {
 
+    }
     show_all_children();
 }
 
