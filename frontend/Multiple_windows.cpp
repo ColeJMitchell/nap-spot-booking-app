@@ -33,7 +33,7 @@ Multiple_windows::Multiple_windows() {
     fix = Gtk::manage(new Gtk::Fixed);
     f = new std::vector<Gtk::Frame*>();
     add(*fix);
-    change_to_page_open();
+    change_to_book_page();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_page_open(){
@@ -150,6 +150,8 @@ void Multiple_windows::change_to_book_page(){
         fix->put(*f2, 743,150+offset);
         offset+=400;
     }
+    b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked));
+    b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked));
     show_all_children();
 }
 
@@ -274,15 +276,39 @@ void Multiple_windows::on_back_clicked_book(){
     offset = 0;
     change_to_home_page();
 }
-
+int offset2 = 0;
 void Multiple_windows::on_scroll_up_clicked(){
-
-
+    for(Gtk::Frame *f2 : *f){
+        fix->remove(*f2);
+    }
+    offset = 0;
+    fix->remove(*l);
+    offset2 += 200;
+    for(Gtk::Frame *f2 : *f){
+        fix->put(*f2, 743,150+offset+offset2);
+        offset+=400;
+    }
+    l = Gtk::manage(new Gtk::Label);
+    l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
+    fix->put(*l,725,20+offset2);
+    show_all_children();
 }
 
 void Multiple_windows::on_scroll_down_clicked(){
-
-
+    for(Gtk::Frame *f2 : *f){
+        fix->remove(*f2);
+    }
+    offset = 0;
+    fix->remove(*l);
+    offset2 -= 200;
+    for(Gtk::Frame *f2 : *f){
+        fix->put(*f2, 743,150+offset+offset2);
+        offset+=400;
+    }
+    l = Gtk::manage(new Gtk::Label);
+    l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
+    fix->put(*l,725,20+offset2);
+    show_all_children();
 }
 
 
