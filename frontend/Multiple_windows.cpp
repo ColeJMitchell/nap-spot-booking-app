@@ -316,7 +316,7 @@ void Multiple_windows::on_scroll_up_clicked(){
     offset = 0;
     fix->remove(*l);
     if(offset2!=0) {
-        offset2 += 200;
+        offset2 += 600;
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset+offset2);
@@ -334,7 +334,7 @@ void Multiple_windows::on_scroll_down_clicked(){
     }
     offset = 0;
     fix->remove(*l);
-    offset2 -= 200;
+    offset2 -= 600;
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset+offset2);
         offset+=600;
