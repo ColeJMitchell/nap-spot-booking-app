@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Insert.h"
 #include "Select.h"
+#include "Update.h"
 Gtk::Fixed *fix;
 //signup & login
 Button* b;
@@ -28,6 +29,8 @@ std::string password;
 int book_id;
 int num_minutes;
 int favorite_id;
+int num_nap_spots;
+int current_user;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
@@ -37,20 +40,19 @@ Gtk::Label *l5;
 Gtk::Label *l6;
 Gtk::Label *l7;
 bool is_book_page;
+bool reserved;
 std::vector<Gtk::Frame*> *f;
-std::vector<std::string> *available;
+std::vector<std::vector<int>> * favorite_ids;
 int offset = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     Select s;
+    Update u;
     fix = Gtk::manage(new Gtk::Fixed);
     f = new std::vector<Gtk::Frame*>();
-    available = new std::vector<std::string>();
-    for(int i=0; i<s.get_row_count("nap_spots"); i++){
-        available->push_back("Open");
-    }
     add(*fix);
-    change_to_page_open();
+    reserved = false;
+    change_to_book_page();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_page_open(){
@@ -261,6 +263,7 @@ void Multiple_windows::on_favorite_id_entered(){
 void Multiple_windows::on_submit_login(){
     Select s;
     if(s.determine_if_user_exists("user_information",username, password)!=-1) {
+        current_user = s.determine_if_user_exists("user_information",username, password);
         fix->remove(*e);
         fix->remove(*e2);
         fix->remove(*l);
@@ -412,15 +415,13 @@ void Multiple_windows::on_scroll_down_clicked(){
 int temp_num;
 int temp_id;
 void Multiple_windows::countdown() {
-
+    Update u;
     Select s;
     int num = temp_num;
     int id = temp_id;
-    while (num > 0) {
-        std::this_thread::sleep_for(std::chrono::minutes(1));
-        num--;
-    }
-    available->at(id) = "Open";
+    std::this_thread::sleep_for(std::chrono::minutes(num));
+    u.update_reservation(id, "Open");
+    reserved = false;
     if(is_book_page){
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
@@ -441,15 +442,20 @@ void Multiple_windows::countdown() {
 }
 
 void Multiple_windows::on_book_nap_spot_clicked(){
+    Update u;
     temp_num = num_minutes;
     temp_id = book_id;
     Select s;
-    if(book_id == -1 || num_minutes == -1){
+    if(book_id == -1 || num_minutes == -1 || reserved == true){
+        e->set_text("");
+        e2->set_text("");
         return;
     }
     else{
-        available->at(book_id) = "Reserved";
+        u.update_reservation(temp_id,"Reserved");
+        reserved = true;
     }
+
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
     }
@@ -485,7 +491,7 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     std::string Attribute1 = "Attribute 1: " + s[2].substr(1, s[2].size() - 2);
     std::string Attribute2 = "Attribute 2: " + s[3].substr(1, s[3].size() - 2);
     std::string Attribute3 = "Attribute 3: " + s[4].substr(1, s[4].size() - 2);
-    std::string Availibility = "Availibility Status: " + available->at(i);
+    std::string Availibility = "Availibility Status: " + s[6];
 
     Gtk::Label* label1 = Gtk::manage(new Gtk::Label());
     label1->set_markup("<b><span size='large'>" + ID + "</span></b>");

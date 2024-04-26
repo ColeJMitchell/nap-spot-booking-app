@@ -7,16 +7,14 @@
 #include <iostream>
 
 //update user information such as a password, email, or username.
-void Update::update_user_information(std::string column, int id, std::string value) {
+void Update::update_reservation(int id, std::string reserve) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
     char *zErrMsg = 0;
-    std::string sql = "UPDATE user_information";
-    sql += " SET ";
-    sql += column;
-    sql += " = \"";
-    sql += value;
+    std::string sql = "UPDATE nap_spots";
+    sql += " SET reserve = \"";
+    sql += reserve;
     sql += "\" WHERE id = ";
     sql += std::to_string(id);
     sql += ";";

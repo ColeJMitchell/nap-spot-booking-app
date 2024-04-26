@@ -7,6 +7,6 @@
 #include <string>
 class Update{
 public:
-    void update_user_information(std::string column, int id, std::string value);
+    void update_reservation(int id, std::string reserve);
 };
 #endif //GOLD_UPDATE_H
