@@ -236,8 +236,12 @@ void Multiple_windows::on_username_entered(){
 }
 
 void Multiple_windows::on_book_id_entered(){
+    Select s;
     try {
         book_id = std::stoi(e->get_text());
+        if(book_id<0 || book_id > s.get_row_count("nap_spots") ){
+            book_id = -1;
+        }
     } catch(const std::exception& e){
         book_id = -1;
     }
@@ -246,6 +250,9 @@ void Multiple_windows::on_book_id_entered(){
 void Multiple_windows::on_minutes_entered(){
     try {
         num_minutes = std::stoi(e2->get_text());
+        if (num_minutes<=0){
+            num_minutes = -1;
+        }
     } catch(const std::exception& e){
         num_minutes = -1;
     }
