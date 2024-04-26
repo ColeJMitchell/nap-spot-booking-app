@@ -52,6 +52,7 @@ Multiple_windows::Multiple_windows() {
     f = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
+    current_user = 0;
     change_to_book_page();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
@@ -206,6 +207,7 @@ void Multiple_windows::change_to_book_page(){
     e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_id_entered));
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked));
+    b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_clicked_book));
     show_all_children();
 }
 
@@ -259,6 +261,8 @@ void Multiple_windows::on_minutes_entered(){
 }
 
 void Multiple_windows::on_favorite_id_entered(){
+    Select s;
+    Update u;
     try {
         favorite_id = std::stoi(e3->get_text());
     } catch(const std::exception& e){
@@ -381,6 +385,29 @@ void Multiple_windows::on_back_clicked_book(){
     offset2 = 0;
     is_book_page = false;
     change_to_home_page();
+}
+
+void Multiple_windows::on_favorite_clicked_book(){
+Select s;
+Update u;
+if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
+    std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    for(int i = 4; i<9; i++){
+        try{
+        if(std::stoi(s2[i])!=-1){
+            continue;
+        }
+        else{
+            u.update_favorite(current_user,i,favorite_id);
+            break;
+            }
+        }
+        catch(const std::exception& e){
+
+        }
+    }
+    }
+e3->set_text("");
 }
 
 void Multiple_windows::on_scroll_up_clicked(){

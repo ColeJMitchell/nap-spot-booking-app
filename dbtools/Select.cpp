@@ -67,6 +67,36 @@ std::vector<std::string> Select::get_one_row_id(std::string table, int id) {
     return result;
 }
 
+
+std::vector<std::string> Select::get_one_row_id_user(std::string table, int id) {
+    sqlite3 *curr_db;
+    int rc = sqlite3_open("../database/database.sqlite", &curr_db);
+    int retCode = 0;
+    char *zErrMsg = 0;
+    std::string sql = "SELECT ";
+    sql += "*";
+    sql += " FROM ";
+    sql += table;
+    sql += " WHERE user_id=";
+    sql += std::to_string(id);
+    sql += ";";
+    std::vector<std::string> result;
+    retCode = sqlite3_exec(curr_db,
+                           sql.c_str(),
+                           cb_select_row,
+                           (void *) &result,
+                           &zErrMsg);
+    if (retCode != SQLITE_OK) {
+        std::cerr << sql
+                  << std::endl
+                  << "SQL error: "
+                  << zErrMsg;
+        sqlite3_free(zErrMsg);
+    }
+    sqlite3_close(curr_db);
+    return result;
+}
+
 int Select::get_row_count(std::string table){
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);

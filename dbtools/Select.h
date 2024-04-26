@@ -16,5 +16,7 @@ public:
     int determine_if_user_exists(std::string table, std::string username);
 
     int determine_if_user_exists(std::string table, std::string username, std::string password);
+
+    std::vector<std::string> get_one_row_id_user(std::string table, int id);
 };
 #endif //GOLD_SELECT_H

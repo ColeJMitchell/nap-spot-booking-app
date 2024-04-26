@@ -71,6 +71,8 @@ public:
     void add_nap_spot_frame(std::vector<std::string> s, int i);
 
     void countdown();
+
+    void on_favorite_clicked_book();
 };
 
 
