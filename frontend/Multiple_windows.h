@@ -58,7 +58,7 @@ public:
 
     void on_back_clicked_book();
 
-
+    void on_back_clicked_favorite();
 
     void on_book_id_entered();
 

@@ -50,7 +50,7 @@ Multiple_windows::Multiple_windows() {
         available->push_back("Open");
     }
     add(*fix);
-    change_to_book_page();
+    change_to_page_open();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_page_open(){
@@ -141,6 +141,16 @@ void Multiple_windows::change_to_home_page(){
 
 void Multiple_windows::change_to_favorite_page(){
     override_background_color(Gdk::RGBA("white"));
+    l6 = Gtk::manage(new Gtk::Label);
+    b = new Button("Scroll up",170,100);
+    b2 = new Button("Scroll down",170,100);
+    b3 = new Button("Back to Home Page",170,100);
+    l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
+    fix->put(*l6,725,20);
+    fix->put(*b , 200,350);
+    fix->put(*b2, 200, 450);
+    fix->put(*b3, 200, 150);
+    b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
     show_all_children();
 }
 
@@ -331,6 +341,14 @@ void Multiple_windows::on_back_clicked_home(){
     change_to_loginpage();
 }
 
+void Multiple_windows::on_back_clicked_favorite(){
+    fix->remove(*l6);
+    fix->remove(*b);
+    fix->remove(*b2);
+    fix->remove(*b3);
+    change_to_home_page();
+}
+
 int offset2 = 0;
 void Multiple_windows::on_back_clicked_book(){
     fix->remove(*b);
@@ -399,7 +417,6 @@ void Multiple_windows::countdown() {
     int num = temp_num;
     int id = temp_id;
     while (num > 0) {
-        std::cout << num;
         std::this_thread::sleep_for(std::chrono::minutes(1));
         num--;
     }
