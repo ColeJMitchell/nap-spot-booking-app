@@ -155,13 +155,17 @@ void Multiple_windows::change_to_favorite_page(){
     b2 = new Button("Scroll down",170,100);
     b3 = new Button("Back to Home Page",170,100);
     b4 = new Button("Book",170,100);
+    b5 = new Button("Remove",170,100);
     l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
     l3 = Gtk::manage(new Gtk::Label);
     l4 = Gtk::manage(new Gtk::Label);
     e = Gtk::manage(new Gtk::Entry);
     e2 = Gtk::manage(new Gtk::Entry);
+    e3 = Gtk::manage(new Gtk::Entry);
     l3->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Book:</b></span>");
     l4->set_markup("<span size = '14000'><b>Enter Number of Minutes:</b></span>");
+    l5 = Gtk::manage(new Gtk::Label);
+    l5->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Remove:</b></span>");
     fix->put(*l6,690,20);
     fix->put(*b , 200,350);
     fix->put(*b2, 200, 450);
@@ -171,6 +175,9 @@ void Multiple_windows::change_to_favorite_page(){
     fix->put(*e ,1350,200);
     fix->put(*e2 ,1350,300);
     fix->put(*b4 ,1350,370);
+    fix->put(*b5 ,1350,640);
+    fix->put(*l5 ,1350,530);
+    fix->put(*e3 ,1350,570);
     std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
     for(int i=4; i<9; i++){
         try{
@@ -202,14 +209,17 @@ void Multiple_windows::change_to_favorite_page(){
 int offset2_favorite = 0;
 void Multiple_windows::on_back_clicked_favorite(){
     fix->remove(*l6);
+    fix->remove(*l5);
     fix->remove(*b);
     fix->remove(*b2);
     fix->remove(*b3);
     fix->remove(*b4);
+    fix->remove(*b5);
     fix->remove(*l3);
     fix->remove(*l4);
     fix->remove(*e);
     fix->remove(*e2);
+    fix->remove(*e3);
     for(Gtk::Frame *f3 : *f2){
         fix->remove(*f3);
     }
