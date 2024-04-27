@@ -426,6 +426,16 @@ if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
     std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
     for(int i = 4; i<9; i++){
         try{
+            if(std::stoi(s2[i])==favorite_id){
+                return;
+            }
+        }
+        catch(const std::exception& e){
+
+        }
+    }
+    for(int i = 4; i<9; i++){
+        try{
         if(std::stoi(s2[i])!=-1){
             continue;
         }
