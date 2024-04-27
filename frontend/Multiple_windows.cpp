@@ -288,14 +288,32 @@ void Multiple_windows::change_to_book_page(){
 }
 
 void Multiple_windows::change_to_request_page(){
-    override_background_color(Gdk::RGBA("white"));
-    show_all_children();
+    int privledge;
+    Select s;
+    std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    try{
+        privledge = std::stoi(s2[3]);
+    }
+    catch(const std::exception& e){
+
+    }
+    if(privledge == 0) {
+        override_background_color(Gdk::RGBA("purple"));
+        b3 = new Button("Back to Home Page", 170, 100);
+        fix->put(*b3, 859, 800);
+        b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
+        show_all_children();
+    }
 }
 
 
-
+void Multiple_windows :: on_back_clicked_request(){
+    fix->remove(*b3);
+    change_to_home_page();
+}
 
 void Multiple_windows::on_request_clicked(){
+    fix->remove(*b4);
     fix->remove(*b5);
     fix->remove(*b6);
     fix->remove(*b7);

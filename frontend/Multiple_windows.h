@@ -82,7 +82,7 @@ public:
 
     void on_remove_clicked();
 
-    void refresh_favorite_page();
+    void on_back_clicked_request();
 };
 
 
