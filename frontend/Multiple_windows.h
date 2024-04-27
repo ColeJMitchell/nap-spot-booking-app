@@ -73,6 +73,10 @@ public:
     void countdown();
 
     void on_favorite_clicked_book();
+
+    void on_scroll_up_clicked_favorite();
+
+    void on_scroll_down_clicked_favorite();
 };
 
 

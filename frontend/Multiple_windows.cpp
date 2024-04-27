@@ -45,7 +45,7 @@ std::vector<Gtk::Frame*> *f;
 std::vector<Gtk::Frame*> *f2;
 std::vector<std::vector<int>> * favorite_ids;
 int offset = 0;
-int favorite_offset = 0;
+int offset_favorite = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     Select s;
@@ -153,7 +153,7 @@ void Multiple_windows::change_to_favorite_page(){
     b2 = new Button("Scroll down",170,100);
     b3 = new Button("Back to Home Page",170,100);
     l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
-    fix->put(*l6,725,20);
+    fix->put(*l6,690,20);
     fix->put(*b , 200,350);
     fix->put(*b2, 200, 450);
     fix->put(*b3, 200, 150);
@@ -173,9 +173,11 @@ void Multiple_windows::change_to_favorite_page(){
         }
     }
     for(Gtk::Frame *f3 : *f2){
-        fix->put(*f3, 664,150+favorite_offset);
-        favorite_offset+=600;
+        fix->put(*f3, 680,150+offset_favorite);
+        offset_favorite+=600;
     }
+    b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_favorite));
+    b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_favorite));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
     show_all_children();
 }
@@ -377,7 +379,7 @@ void Multiple_windows::on_back_clicked_home(){
     fix->remove(*b7);
     change_to_loginpage();
 }
-
+int offset2_favorite = 0;
 void Multiple_windows::on_back_clicked_favorite(){
     fix->remove(*l6);
     fix->remove(*b);
@@ -387,7 +389,8 @@ void Multiple_windows::on_back_clicked_favorite(){
         fix->remove(*f3);
     }
     f2->clear();
-    favorite_offset = 0;
+    offset_favorite = 0;
+    offset2_favorite = 0;
     change_to_home_page();
 }
 
@@ -471,6 +474,42 @@ void Multiple_windows::on_scroll_down_clicked(){
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,725,20+offset2);
+    show_all_children();
+}
+
+void Multiple_windows::on_scroll_up_clicked_favorite(){
+    for(Gtk::Frame *f3 : *f2){
+        fix->remove(*f3);
+    }
+    offset_favorite = 0;
+    fix->remove(*l6);
+    if(offset2_favorite!=0) {
+        offset2_favorite += 600;
+    }
+    for(Gtk::Frame *f3 : *f2){
+        fix->put(*f3, 680,150+offset_favorite+offset2_favorite);
+        offset_favorite+=600;
+    }
+    l6= Gtk::manage(new Gtk::Label);
+    l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
+    fix->put(*l6,690,20+offset2_favorite);
+    show_all_children();
+}
+
+void Multiple_windows::on_scroll_down_clicked_favorite(){
+    for(Gtk::Frame *f3 : *f2){
+        fix->remove(*f3);
+    }
+    offset_favorite = 0;
+    fix->remove(*l6);
+    offset2_favorite -= 600;
+    for(Gtk::Frame *f3 : *f2){
+        fix->put(*f3, 664,150+offset_favorite+offset2_favorite);
+        offset_favorite+=600;
+    }
+    l6 = Gtk::manage(new Gtk::Label);
+    l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
+    fix->put(*l6,690,20+offset2_favorite);
     show_all_children();
 }
 
