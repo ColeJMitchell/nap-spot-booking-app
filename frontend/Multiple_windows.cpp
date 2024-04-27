@@ -620,27 +620,62 @@ void Multiple_windows::on_book_nap_spot_clicked(){
         u.update_reservation(temp_id,"Reserved");
         reserved = true;
     }
+    if(is_book_page) {
+        for (Gtk::Frame *f2: *f) {
+            fix->remove(*f2);
+        }
+        f->clear();
+        offset = 0;
+        for (int i = 0; i < s.get_row_count("nap_spots"); i++) {
+            std::vector<std::string> s2 = s.get_one_row_id("nap_spots", i);
+            add_nap_spot_frame(s2, 0);
+        }
+        for (Gtk::Frame *f2: *f) {
+            fix->put(*f2, 664, 150 + offset + offset2);
+            offset += 600;
+        }
+        e->set_text("");
+        e2->set_text("");
+        try {
+            std::thread countdown_thread(&Multiple_windows::countdown, this);
+            countdown_thread.detach();
+        } catch (const std::exception &e) {
 
-    for(Gtk::Frame *f2 : *f){
-        fix->remove(*f2);
+        }
     }
-    f->clear();
-    offset = 0;
-    for(int i=0; i<s.get_row_count("nap_spots"); i++){
-        std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2, 0);
-    }
-    for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 664,150+offset+offset2);
-        offset+=600;
-    }
-    e->set_text("");
-    e2->set_text("");
-    try {
-        std::thread countdown_thread(&Multiple_windows::countdown,this);
-        countdown_thread.detach();
-    } catch (const std::exception& e) {
+    else if(is_favorite_page){
+        for(Gtk::Frame *f3 : *f2){
+            fix->remove(*f3);
+        }
+        f2->clear();
+        offset_favorite = 0;
+        std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+        for(int i=4; i<9; i++){
+            try{
+                if(std::stoi(s3[i])!=-1){
+                    std::vector<std::string> s2 = s.get_one_row_id("nap_spots",std::stoi(s3[i]));
+                    add_nap_spot_frame(s2, 1);
+                }
+                else{
+                    continue;
+                }
+            }
+            catch(const std::exception& e){
 
+            }
+        }
+        for(Gtk::Frame *f3 : *f2){
+            fix->put(*f3, 680,150+offset_favorite+ offset2_favorite);
+            offset_favorite+=600;
+        }
+        e->set_text("");
+        e2->set_text("");
+        try {
+            std::thread countdown_thread(&Multiple_windows::countdown, this);
+            countdown_thread.detach();
+        } catch (const std::exception &e) {
+
+        }
     }
     show_all_children();
 }
