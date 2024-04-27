@@ -42,14 +42,17 @@ Gtk::Label *l7;
 bool is_book_page;
 bool reserved;
 std::vector<Gtk::Frame*> *f;
+std::vector<Gtk::Frame*> *f2;
 std::vector<std::vector<int>> * favorite_ids;
 int offset = 0;
+int favorite_offset = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     Select s;
     Update u;
     fix = Gtk::manage(new Gtk::Fixed);
     f = new std::vector<Gtk::Frame*>();
+    f2 = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
     current_user = 0;
@@ -143,6 +146,7 @@ void Multiple_windows::change_to_home_page(){
 }
 
 void Multiple_windows::change_to_favorite_page(){
+    Select s;
     override_background_color(Gdk::RGBA("white"));
     l6 = Gtk::manage(new Gtk::Label);
     b = new Button("Scroll up",170,100);
@@ -153,6 +157,25 @@ void Multiple_windows::change_to_favorite_page(){
     fix->put(*b , 200,350);
     fix->put(*b2, 200, 450);
     fix->put(*b3, 200, 150);
+    std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+    for(int i=4; i<9; i++){
+        try{
+            if(std::stoi(s3[i])!=-1){
+                std::vector<std::string> s2 = s.get_one_row_id("nap_spots",std::stoi(s3[i]));
+                add_nap_spot_frame(s2, 1);
+            }
+            else{
+                continue;
+            }
+        }
+        catch(const std::exception& e){
+
+        }
+    }
+    for(Gtk::Frame *f3 : *f2){
+        fix->put(*f3, 664,150+favorite_offset);
+        favorite_offset+=600;
+    }
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
     show_all_children();
 }
@@ -195,7 +218,7 @@ void Multiple_windows::change_to_book_page(){
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2, i);
+        add_nap_spot_frame(s2, 0);
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset);
@@ -360,6 +383,11 @@ void Multiple_windows::on_back_clicked_favorite(){
     fix->remove(*b);
     fix->remove(*b2);
     fix->remove(*b3);
+    for(Gtk::Frame *f3 : *f2){
+        fix->remove(*f3);
+    }
+    f2->clear();
+    favorite_offset = 0;
     change_to_home_page();
 }
 
@@ -464,7 +492,7 @@ void Multiple_windows::countdown() {
     offset = 0;
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2, i);
+        add_nap_spot_frame(s2, 0);
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset+offset2);
@@ -497,7 +525,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
     offset = 0;
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2, i);
+        add_nap_spot_frame(s2, 0);
     }
     for(Gtk::Frame *f2 : *f){
         fix->put(*f2, 664,150+offset+offset2);
@@ -551,5 +579,10 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     box->pack_start(*label5);
     box->pack_start(*image);
     frame->add(*box);
-    f->push_back(frame);
+    if(i == 0) {
+        f->push_back(frame);
+    }
+    else{
+        f2->push_back(frame);
+    }
 }
