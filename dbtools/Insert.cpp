@@ -15,7 +15,7 @@ void Insert::insert_user(int user_id, std::string username, std::string password
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO user_information";
-    sql += " ( user_id, username, password, privledge) ";
+    sql += " ( user_id, username, password, privledge, spot1, spot2, spot3, spot4, spot5) ";
     sql += "VALUES ( ";
     sql += std::to_string(user_id);
     sql += ", \"";
@@ -25,6 +25,7 @@ void Insert::insert_user(int user_id, std::string username, std::string password
     sql += password;
     sql += "\", ";
     sql += std::to_string(privledge);
+    sql += ", -1, -1, -1, -1, -1";
     sql += ");";
     retCode = sqlite3_exec(curr_db,
                            sql.c_str(),

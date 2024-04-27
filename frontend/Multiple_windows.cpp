@@ -318,6 +318,7 @@ void Multiple_windows::on_submit_signup(){
     if(s.determine_if_user_exists("user_information",username, password)==-1) {
         int count = s.get_row_count("user_information");
         i.insert_user(count,username,password,0);
+        current_user = count;
         fix->remove(*e);
         fix->remove(*e2);
         fix->remove(*l);
