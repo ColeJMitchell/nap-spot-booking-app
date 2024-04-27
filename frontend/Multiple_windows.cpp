@@ -154,11 +154,23 @@ void Multiple_windows::change_to_favorite_page(){
     b = new Button("Scroll up",170,100);
     b2 = new Button("Scroll down",170,100);
     b3 = new Button("Back to Home Page",170,100);
+    b4 = new Button("Book",170,100);
     l6->set_markup("<span size = '30000'><b>Your Favorite Nap Spots</b></span>");
+    l3 = Gtk::manage(new Gtk::Label);
+    l4 = Gtk::manage(new Gtk::Label);
+    e = Gtk::manage(new Gtk::Entry);
+    e2 = Gtk::manage(new Gtk::Entry);
+    l3->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Book:</b></span>");
+    l4->set_markup("<span size = '14000'><b>Enter Number of Minutes:</b></span>");
     fix->put(*l6,690,20);
     fix->put(*b , 200,350);
     fix->put(*b2, 200, 450);
     fix->put(*b3, 200, 150);
+    fix->put(*l3 ,1350,160);
+    fix->put(*l4 ,1350,260);
+    fix->put(*e ,1350,200);
+    fix->put(*e2 ,1350,300);
+    fix->put(*b4 ,1350,370);
     std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
     for(int i=4; i<9; i++){
         try{
@@ -181,7 +193,31 @@ void Multiple_windows::change_to_favorite_page(){
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_favorite));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_favorite));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
+    e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_id_entered));
+    e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_minutes_entered));
+    b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
     show_all_children();
+}
+
+int offset2_favorite = 0;
+void Multiple_windows::on_back_clicked_favorite(){
+    fix->remove(*l6);
+    fix->remove(*b);
+    fix->remove(*b2);
+    fix->remove(*b3);
+    fix->remove(*b4);
+    fix->remove(*l3);
+    fix->remove(*l4);
+    fix->remove(*e);
+    fix->remove(*e2);
+    for(Gtk::Frame *f3 : *f2){
+        fix->remove(*f3);
+    }
+    f2->clear();
+    offset_favorite = 0;
+    offset2_favorite = 0;
+    is_favorite_page = false;
+    change_to_home_page();
 }
 
 void Multiple_windows::change_to_book_page(){
@@ -381,21 +417,6 @@ void Multiple_windows::on_back_clicked_home(){
     fix->remove(*b6);
     fix->remove(*b7);
     change_to_loginpage();
-}
-int offset2_favorite = 0;
-void Multiple_windows::on_back_clicked_favorite(){
-    fix->remove(*l6);
-    fix->remove(*b);
-    fix->remove(*b2);
-    fix->remove(*b3);
-    for(Gtk::Frame *f3 : *f2){
-        fix->remove(*f3);
-    }
-    f2->clear();
-    offset_favorite = 0;
-    offset2_favorite = 0;
-    is_favorite_page = false;
-    change_to_home_page();
 }
 
 int offset2 = 0;
