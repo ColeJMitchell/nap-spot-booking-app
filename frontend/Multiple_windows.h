@@ -77,6 +77,12 @@ public:
     void on_scroll_up_clicked_favorite();
 
     void on_scroll_down_clicked_favorite();
+
+    void on_remove_id_entered();
+
+    void on_remove_clicked();
+
+    void refresh_favorite_page();
 };
 
 

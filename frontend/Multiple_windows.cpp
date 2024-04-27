@@ -31,6 +31,7 @@ int num_minutes;
 int favorite_id;
 int num_nap_spots;
 int current_user;
+int remove_id;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
@@ -202,7 +203,9 @@ void Multiple_windows::change_to_favorite_page(){
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
     e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_id_entered));
     e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_minutes_entered));
+    e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_remove_id_entered));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
+    b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_remove_clicked));
     show_all_children();
 }
 
@@ -299,7 +302,50 @@ void Multiple_windows::on_request_clicked(){
     change_to_request_page();
 }
 
+void Multiple_windows::on_remove_clicked(){
+    Select s;
+    Update u;
+    std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    if(remove_id >= 0) {
+        for (int i = 4; i < 9; i++) {
+            try {
+                if (std::stoi(s2[i]) == remove_id) {
+                    u.update_favorite(current_user,i,-1);
+                }
+            }
+            catch (const std::exception &e) {
 
+            }
+        }
+        for(Gtk::Frame *f3 : *f2){
+            fix->remove(*f3);
+        }
+        f2->clear();
+        offset_favorite = 0;
+        std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+        for(int i=4; i<9; i++){
+            try{
+                if(std::stoi(s3[i])!=-1){
+                    std::vector<std::string> s2 = s.get_one_row_id("nap_spots",std::stoi(s3[i]));
+                    add_nap_spot_frame(s2, 1);
+                }
+                else{
+                    continue;
+                }
+            }
+            catch(const std::exception& e){
+
+            }
+        }
+        for(Gtk::Frame *f3 : *f2){
+            fix->put(*f3, 680,150+offset_favorite+ offset2_favorite);
+            offset_favorite+=600;
+        }
+        e3->set_text("");
+        show_all_children();
+    }
+
+}
 
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
@@ -319,6 +365,18 @@ void Multiple_windows::on_book_id_entered(){
         }
     } catch(const std::exception& e){
         book_id = -1;
+    }
+}
+
+void Multiple_windows::on_remove_id_entered(){
+    Select s;
+    try {
+        remove_id = std::stoi(e3->get_text());
+        if(remove_id<0 || remove_id > s.get_row_count("nap_spots") ){
+            remove_id = -1;
+        }
+    } catch(const std::exception& e){
+        remove_id = -1;
     }
 }
 
