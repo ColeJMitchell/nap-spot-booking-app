@@ -40,6 +40,7 @@ Gtk::Label *l5;
 Gtk::Label *l6;
 Gtk::Label *l7;
 bool is_book_page;
+bool is_favorite_page;
 bool reserved;
 std::vector<Gtk::Frame*> *f;
 std::vector<Gtk::Frame*> *f2;
@@ -146,6 +147,7 @@ void Multiple_windows::change_to_home_page(){
 }
 
 void Multiple_windows::change_to_favorite_page(){
+    is_favorite_page = true;
     Select s;
     override_background_color(Gdk::RGBA("white"));
     l6 = Gtk::manage(new Gtk::Label);
@@ -392,6 +394,7 @@ void Multiple_windows::on_back_clicked_favorite(){
     f2->clear();
     offset_favorite = 0;
     offset2_favorite = 0;
+    is_favorite_page = false;
     change_to_home_page();
 }
 
@@ -515,7 +518,7 @@ void Multiple_windows::on_scroll_down_clicked_favorite(){
     fix->remove(*l6);
     offset2_favorite -= 600;
     for(Gtk::Frame *f3 : *f2){
-        fix->put(*f3, 664,150+offset_favorite+offset2_favorite);
+        fix->put(*f3, 680,150+offset_favorite+offset2_favorite);
         offset_favorite+=600;
     }
     l6 = Gtk::manage(new Gtk::Label);
@@ -550,6 +553,35 @@ void Multiple_windows::countdown() {
     }
     show_all_children();
     }
+    else if(is_favorite_page){
+        for(Gtk::Frame *f3 : *f2){
+            fix->remove(*f3);
+        }
+        f2->clear();
+        offset_favorite = 0;
+        std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+        for(int i=4; i<9; i++){
+            try{
+                if(std::stoi(s3[i])!=-1){
+                    std::vector<std::string> s2 = s.get_one_row_id("nap_spots",std::stoi(s3[i]));
+                    add_nap_spot_frame(s2, 1);
+                }
+                else{
+                    continue;
+                }
+            }
+            catch(const std::exception& e){
+
+            }
+        }
+        for(Gtk::Frame *f3 : *f2){
+            fix->put(*f3, 680,150+offset_favorite+ offset2_favorite);
+            offset_favorite+=600;
+        }
+        show_all_children();
+    }
+
+
 
 }
 
