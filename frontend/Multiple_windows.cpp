@@ -348,13 +348,16 @@ void Multiple_windows::change_to_request_page(){
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
         show_all_children();
     }
+    else if(privledge == 1){
+
+    }
 }
 
 
 void Multiple_windows :: on_submit_nap_spot(){
     Insert i;
     Select s;
-    i.insert_nap_spot("new_nap_spots",s.get_row_count("nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
+    i.insert_nap_spot("new_nap_spots",s.get_row_count("new_nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
     e->set_text("");
     e2->set_text("");
     e3->set_text("");
