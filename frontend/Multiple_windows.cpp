@@ -70,11 +70,10 @@ Multiple_windows::Multiple_windows() {
     f3 = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
-    current_user = 0;
     for(int i = 0; i < s.get_row_count("nap_spots"); i++){
         u.update_reservation(i, "Open");
     }
-    change_to_book_page();
+    change_to_page_open();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
 void Multiple_windows::change_to_page_open(){
@@ -383,6 +382,7 @@ void Multiple_windows::change_to_request_page(){
         b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_request));
         b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_request));
         b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_approval));
+        b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_denial));
         e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_approve_id_entered));
         e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_deny_id_entered));
         for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
@@ -449,12 +449,16 @@ void Multiple_windows :: on_approval(){
     std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",approve_id);
     i.insert_nap_spot("nap_spots",s.get_row_count("nap_spots"),s2[1],s2[2],s2[3],s2[4],s2[5]);
     u.update_new_nap_spot(approve_id);
+    e->set_text("");
     reload_request_page();
 
 }
 
 void Multiple_windows :: on_denial(){
-
+    Update u;
+    u.update_new_nap_spot(deny_id);
+    e3->set_text("");
+    reload_request_page();
 }
 
 
