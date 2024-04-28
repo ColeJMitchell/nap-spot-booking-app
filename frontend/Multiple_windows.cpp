@@ -875,7 +875,7 @@ void Multiple_windows::on_scroll_up_clicked_request(){
         offset2_request += 600;
     }
     for(Gtk::Frame *f2 : *f3){
-        fix->put(*f2, 680,150+offset_request+offset2_request);
+        fix->put(*f2, 664,150+offset_request+offset2_request);
         offset_request+=600;
     }
     l= Gtk::manage(new Gtk::Label);
@@ -892,7 +892,7 @@ void Multiple_windows::on_scroll_down_clicked_request(){
     fix->remove(*l);
     offset2_request -= 600;
     for(Gtk::Frame *f2 : *f3){
-        fix->put(*f2, 680,150+offset_request+offset2_request);
+        fix->put(*f2, 664,150+offset_request+offset2_request);
         offset_request+=600;
     }
     l = Gtk::manage(new Gtk::Label);
