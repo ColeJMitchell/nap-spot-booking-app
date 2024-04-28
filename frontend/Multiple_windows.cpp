@@ -39,6 +39,8 @@ int favorite_id;
 int num_nap_spots;
 int current_user;
 int remove_id;
+int approve_id;
+int deny_id;
 //login/signup labels
 Gtk::Label *l;
 Gtk::Label *l2;
@@ -380,6 +382,9 @@ void Multiple_windows::change_to_request_page(){
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request_admin));
         b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_request));
         b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_request));
+        b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_approval));
+        e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_approve_id_entered));
+        e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_deny_id_entered));
         for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
             std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
             try{
@@ -403,13 +408,55 @@ void Multiple_windows::change_to_request_page(){
 void Multiple_windows :: on_submit_nap_spot(){
     Insert i;
     Select s;
-    i.insert_nap_spot("new_nap_spots",s.get_row_count("new_nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
+    i.insert_new_nap_spot("new_nap_spots",s.get_row_count("new_nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
     e->set_text("");
     e2->set_text("");
     e3->set_text("");
     e4->set_text("");
     e5->set_text("");
 }
+
+void Multiple_windows :: reload_request_page(){
+    Select s;
+    for(Gtk::Frame *f2 : *f3){
+        fix->remove(*f2);
+    }
+    f3->clear();
+    offset_request = 0;
+    for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
+        std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
+        try{
+            if(std::stoi(s2[7])==0){
+                add_nap_spot_frame(s2, 2);
+            }
+        }
+        catch(std::exception &e){
+
+        }
+    }
+    for(Gtk::Frame *f2 : *f3){
+        fix->put(*f2, 664,150+offset_request+offset2_request);
+        offset_request+=600;
+    }
+    show_all_children();
+
+}
+
+void Multiple_windows :: on_approval(){
+    Select s;
+    Update u;
+    Insert i;
+    std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",approve_id);
+    i.insert_nap_spot("nap_spots",s.get_row_count("nap_spots"),s2[1],s2[2],s2[3],s2[4],s2[5]);
+    u.update_new_nap_spot(approve_id);
+    reload_request_page();
+
+}
+
+void Multiple_windows :: on_denial(){
+
+}
+
 
 void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*b3);
@@ -539,6 +586,30 @@ void Multiple_windows::on_book_id_entered(){
         }
     } catch(const std::exception& e){
         book_id = -1;
+    }
+}
+
+void Multiple_windows::on_approve_id_entered(){
+    Select s;
+    try {
+        approve_id = std::stoi(e->get_text());
+        if(approve_id<0 || approve_id > s.get_row_count("new_nap_spots") ){
+            approve_id = -1;
+        }
+    } catch(const std::exception& e){
+        approve_id = -1;
+    }
+}
+
+void Multiple_windows::on_deny_id_entered(){
+    Select s;
+    try {
+        deny_id = std::stoi(e3->get_text());
+        if(deny_id<0 || deny_id > s.get_row_count("new_nap_spots") ){
+            deny_id = -1;
+        }
+    } catch(const std::exception& e){
+        deny_id = -1;
     }
 }
 

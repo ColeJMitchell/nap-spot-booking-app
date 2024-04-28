@@ -94,6 +94,10 @@ public:
 
     void on_photo_entered();
 
+    void on_approve_id_entered();
+
+    void on_deny_id_entered();
+
     void on_submit_nap_spot();
 
     void on_back_clicked_request_admin();
@@ -101,6 +105,12 @@ public:
     void on_scroll_up_clicked_request();
 
     void on_scroll_down_clicked_request();
+
+    void on_approval();
+
+    void on_denial();
+
+    void reload_request_page();
 };
 
 

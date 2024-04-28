@@ -32,6 +32,31 @@ void Update::update_reservation(int id, std::string reserve) {
     }
     }
 
+void Update::update_new_nap_spot(int id) {
+    sqlite3 *curr_db;
+    int rc = sqlite3_open("../database/database.sqlite", &curr_db);
+    int retCode = 0;
+    char *zErrMsg = 0;
+    std::string sql = "UPDATE new_nap_spots";
+    sql += " SET remove = ";
+    sql += std::to_string(1);
+    sql += " WHERE id = ";
+    sql += std::to_string(id);
+    sql += ";";
+    retCode = sqlite3_exec(curr_db,
+                           sql.c_str(),
+                           0,
+                           0,
+                           &zErrMsg);
+    if( retCode != SQLITE_OK ){
+        std::cerr << sql
+                  << std::endl
+                  << "SQL error: "
+                  << zErrMsg;
+        sqlite3_free(zErrMsg);
+    }
+}
+
     void Update::update_favorite(int id, int favorite, int value) {
         sqlite3 *curr_db;
         int rc = sqlite3_open("../database/database.sqlite", &curr_db);

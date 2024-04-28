@@ -12,5 +12,7 @@ public:
     void update_favorite(int id, int favorite);
 
     void update_favorite(int id, int favorite, int value);
+
+    void update_new_nap_spot(int id);
 };
 #endif //GOLD_UPDATE_H
