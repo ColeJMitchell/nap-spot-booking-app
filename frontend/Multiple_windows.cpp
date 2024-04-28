@@ -356,13 +356,27 @@ void Multiple_windows::change_to_request_page(){
         override_background_color(Gdk::RGBA("white"));
         b = new Button("Scroll up",170,100);
         b2 = new Button("Scroll down",170,100);
+        b3 = new Button("Approve",170,100);
         b4 = new Button("Back to Home Page",170,100);
+        b5 = new Button("Deny",170,100);
         l = Gtk::manage(new Gtk::Label);
         l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
+        l3 = Gtk::manage(new Gtk::Label);
+        l4 = Gtk::manage(new Gtk::Label);
+        e = Gtk::manage(new Gtk::Entry);
+        e3 = Gtk::manage(new Gtk::Entry);
+        l3->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Approve:</b></span>");
+        l4->set_markup("<span size = '14000'><b>Enter the ID of the Nap Spot You Wish to Deny:</b></span>");
         fix->put(*l,770,20);
         fix->put(*b4, 200, 150);
         fix->put(*b , 200,350);
         fix->put(*b2, 200, 450);
+        fix->put(*b3 , 1350,300);
+        fix->put(*b5, 1350, 670);
+        fix->put(*l3 ,1350,160);
+        fix->put(*l4 ,1350,530);
+        fix->put(*e ,1350,200);;
+        fix->put(*e3 ,1350,570);
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request_admin));
         b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_request));
         b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_request));
@@ -416,8 +430,14 @@ void Multiple_windows :: on_back_clicked_request(){
 void Multiple_windows :: on_back_clicked_request_admin(){
     fix->remove(*b4);
     fix->remove(*l);
+    fix->remove(*l3);
+    fix->remove(*l4);
+    fix->remove(*e);
+    fix->remove(*e3);
     fix->remove(*b);
     fix->remove(*b2);
+    fix->remove(*b3);
+    fix->remove(*b5);
     for(Gtk::Frame *f2 : *f3){
         fix->remove(*f2);
     }
