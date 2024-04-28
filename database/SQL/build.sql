@@ -27,7 +27,8 @@ create table new_nap_spots(
     attribute_2 varchar(10),
     attribute_3 varchar(10),
     image varchar(100),
-    reserve varchar(10)
+    reserve varchar(10),
+    remove int
 );
 .separator ","
 .mode csv

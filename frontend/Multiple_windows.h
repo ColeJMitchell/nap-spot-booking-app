@@ -95,6 +95,8 @@ public:
     void on_photo_entered();
 
     void on_submit_nap_spot();
+
+    void on_back_clicked_request_admin();
 };
 
 

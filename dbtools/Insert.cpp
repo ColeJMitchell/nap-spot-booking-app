@@ -52,7 +52,7 @@ void Insert::insert_nap_spot(std::string table, int id,  std::string name, std::
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO ";
     sql += table;
-    sql += " ( id, name, attribute_1, attribute_2, attribute_3, image, reserve) ";
+    sql += " ( id, name, attribute_1, attribute_2, attribute_3, image, reserve, remove) ";
     sql += "VALUES (";
     sql += std::to_string(id);
     sql += ", '''";
@@ -65,7 +65,9 @@ void Insert::insert_nap_spot(std::string table, int id,  std::string name, std::
     sql += attribute3;
     sql += "''', \"";
     sql += photo;
-    sql += "\", ";
+    sql += "\", \"";
+    sql += "Open";
+    sql += ", \"";
     sql += std::to_string(0);
     sql += " );";
     retCode = sqlite3_exec(curr_db,

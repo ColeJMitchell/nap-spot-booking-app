@@ -52,9 +52,11 @@ bool is_favorite_page;
 bool reserved;
 std::vector<Gtk::Frame*> *f;
 std::vector<Gtk::Frame*> *f2;
+std::vector<Gtk::Frame*> *f3;
 std::vector<std::vector<int>> * favorite_ids;
 int offset = 0;
 int offset_favorite = 0;
+int offset_request = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     Select s;
@@ -62,9 +64,10 @@ Multiple_windows::Multiple_windows() {
     fix = Gtk::manage(new Gtk::Fixed);
     f = new std::vector<Gtk::Frame*>();
     f2 = new std::vector<Gtk::Frame*>();
+    f3 = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
-    current_user = 1;
+    current_user = 0;
     for(int i = 0; i < s.get_row_count("nap_spots"); i++){
         u.update_reservation(i, "Open");
     }
@@ -349,7 +352,29 @@ void Multiple_windows::change_to_request_page(){
         show_all_children();
     }
     else if(privledge == 1){
+        override_background_color(Gdk::RGBA("white"));
+        b4 = new Button("Back to Home Page",170,100);
+        l = Gtk::manage(new Gtk::Label);
+        l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
+        fix->put(*l,770,20);
+        fix->put(*b4, 200, 150);
+        b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request_admin));
+        for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
+            std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
+            try{
+            if(std::stoi(s2[7])==0){
+            add_nap_spot_frame(s2, 2);
+            }
+            }
+            catch(std::exception &e){
 
+            }
+        }
+        for(Gtk::Frame *f2 : *f3){
+            fix->put(*f2, 664,150+offset_request);
+            offset_request+=600;
+        }
+        show_all_children();
     }
 }
 
@@ -378,6 +403,17 @@ void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*l3);
     fix->remove(*l4);
     fix->remove(*l5);
+    change_to_home_page();
+}
+
+void Multiple_windows :: on_back_clicked_request_admin(){
+    fix->remove(*b4);
+    fix->remove(*l);
+    for(Gtk::Frame *f2 : *f3){
+        fix->remove(*f2);
+    }
+    f3->clear();
+    offset_request = 0;
     change_to_home_page();
 }
 
@@ -879,14 +915,15 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     label4->set_markup("<span size='large'>" + Attribute2 + "</span>");
     Gtk::Label* label5 = Gtk::manage(new Gtk::Label());
     label5->set_markup("<span size='large'>" + Attribute3 + "</span>");
-    Gtk::Label* label6 = Gtk::manage(new Gtk::Label());
-    label6->set_markup("<span size='large'>" + Availibility + "</span>");
-
     Glib::RefPtr<Gdk::Pixbuf> p = Gdk::Pixbuf::create_from_file(s[5]);
     Glib::RefPtr<Gdk::Pixbuf> rp = p->scale_simple(400, 400, Gdk::INTERP_BILINEAR);
     Gtk::Image* image = Gtk::manage(new Gtk::Image(rp));
     box->pack_start(*label1);
-    box->pack_start(*label6);
+    if(i!=2) {
+        Gtk::Label *label6 = Gtk::manage(new Gtk::Label());
+        label6->set_markup("<span size='large'>" + Availibility + "</span>");
+        box->pack_start(*label6);
+    }
     box->pack_start(*label2);
     box->pack_start(*label3);
     box->pack_start(*label4);
@@ -895,6 +932,9 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     frame->add(*box);
     if(i == 0) {
         f->push_back(frame);
+    }
+    else if(i == 2){
+        f3->push_back(frame);
     }
     else{
         f2->push_back(frame);
