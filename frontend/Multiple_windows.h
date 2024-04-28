@@ -97,6 +97,10 @@ public:
     void on_submit_nap_spot();
 
     void on_back_clicked_request_admin();
+
+    void on_scroll_up_clicked_request();
+
+    void on_scroll_down_clicked_request();
 };
 
 

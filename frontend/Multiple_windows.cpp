@@ -57,6 +57,7 @@ std::vector<std::vector<int>> * favorite_ids;
 int offset = 0;
 int offset_favorite = 0;
 int offset_request = 0;
+int offset2_request = 0;
 //starts the gui and immediately sets page1
 Multiple_windows::Multiple_windows() {
     Select s;
@@ -353,12 +354,18 @@ void Multiple_windows::change_to_request_page(){
     }
     else if(privledge == 1){
         override_background_color(Gdk::RGBA("white"));
+        b = new Button("Scroll up",170,100);
+        b2 = new Button("Scroll down",170,100);
         b4 = new Button("Back to Home Page",170,100);
         l = Gtk::manage(new Gtk::Label);
         l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
         fix->put(*l,770,20);
         fix->put(*b4, 200, 150);
+        fix->put(*b , 200,350);
+        fix->put(*b2, 200, 450);
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request_admin));
+        b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_request));
+        b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_request));
         for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
             std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
             try{
@@ -409,11 +416,14 @@ void Multiple_windows :: on_back_clicked_request(){
 void Multiple_windows :: on_back_clicked_request_admin(){
     fix->remove(*b4);
     fix->remove(*l);
+    fix->remove(*b);
+    fix->remove(*b2);
     for(Gtk::Frame *f2 : *f3){
         fix->remove(*f2);
     }
     f3->clear();
     offset_request = 0;
+    offset2_request = 0;
     change_to_home_page();
 }
 
@@ -759,6 +769,43 @@ void Multiple_windows::on_scroll_down_clicked_favorite(){
     fix->put(*l6,690,20+offset2_favorite);
     show_all_children();
 }
+
+void Multiple_windows::on_scroll_up_clicked_request(){
+    for(Gtk::Frame *f2 : *f3){
+        fix->remove(*f2);
+    }
+    offset_request = 0;
+    fix->remove(*l);
+    if(offset2_request!=0) {
+        offset2_request += 600;
+    }
+    for(Gtk::Frame *f2 : *f3){
+        fix->put(*f2, 680,150+offset_request+offset2_request);
+        offset_request+=600;
+    }
+    l= Gtk::manage(new Gtk::Label);
+    l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
+    fix->put(*l,790,20+offset2_request);
+    show_all_children();
+}
+
+void Multiple_windows::on_scroll_down_clicked_request(){
+    for(Gtk::Frame *f2 : *f3){
+        fix->remove(*f2);
+    }
+    offset_request = 0;
+    fix->remove(*l);
+    offset2_request -= 600;
+    for(Gtk::Frame *f2 : *f3){
+        fix->put(*f2, 680,150+offset_request+offset2_request);
+        offset_request+=600;
+    }
+    l = Gtk::manage(new Gtk::Label);
+    l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
+    fix->put(*l,790,20+offset2_request);
+    show_all_children();
+}
+
 
 int temp_num;
 int temp_id;
