@@ -24,6 +24,8 @@ Button* b7;
 Gtk::Entry *e;
 Gtk::Entry *e2;
 Gtk::Entry *e3;
+Gtk::Entry *e4;
+Gtk::Entry *e5;
 std::string username;
 std::string password;
 int book_id;
@@ -57,7 +59,10 @@ Multiple_windows::Multiple_windows() {
     f2 = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
-    current_user = 0;
+    current_user = 1;
+    for(int i = 0; i < s.get_row_count("nap_spots"); i++){
+        u.update_reservation(i, "Open");
+    }
     change_to_book_page();
 }
 //displays first page which has two buttons which can take you either to sign up or log in
@@ -298,10 +303,38 @@ void Multiple_windows::change_to_request_page(){
 
     }
     if(privledge == 0) {
-        override_background_color(Gdk::RGBA("purple"));
-        b3 = new Button("Back to Home Page", 170, 100);
-        fix->put(*b3, 859, 800);
-        b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
+        override_background_color(Gdk::RGBA("grey"));
+        l = Gtk::manage(new Gtk::Label);
+        l2 = Gtk::manage(new Gtk::Label);
+        l3 = Gtk::manage(new Gtk::Label);
+        l4 = Gtk::manage(new Gtk::Label);
+        l5 = Gtk::manage(new Gtk::Label);
+        e = Gtk::manage(new Gtk::Entry);
+        e2 = Gtk::manage(new Gtk::Entry);
+        e3 = Gtk::manage(new Gtk::Entry);
+        e4 = Gtk::manage(new Gtk::Entry);
+        e5 = Gtk::manage(new Gtk::Entry);
+        l->set_markup("<span size = '15000'><b>Enter Nap Spot Name:</b></span>");
+        l2->set_markup("<span size = '15000'><b>Enter Attribute 1:</b></span>");
+        l3->set_markup("<span size = '15000'><b>Enter Attribute 2:</b></span>");
+        l4->set_markup("<span size = '15000'><b>Enter Attribute 3:</b></span>");
+        l5->set_markup("<span size = '15000'><b>Enter Path to Photo:</b></span>");
+        b3 = new Button("Submit", 170, 100);
+        b4 = new Button("Back to Home Page",170,100);
+        fix->put(*b3, 845, 850);
+        fix->put(*b4, 200, 150);
+        fix->put(*l, 845, 50);
+        fix->put(*l2, 845, 200);
+        fix->put(*l3, 845, 350);
+        fix->put(*l4, 845, 500);
+        fix->put(*l5, 845, 650);
+        fix->put(*e, 845, 100);
+        fix->put(*e2, 845, 250);
+        fix->put(*e3, 845, 400);
+        fix->put(*e4, 845, 550);
+        fix->put(*e5, 845, 700);
+
+        b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
         show_all_children();
     }
 }
@@ -309,6 +342,17 @@ void Multiple_windows::change_to_request_page(){
 
 void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*b3);
+    fix->remove(*b4);
+    fix->remove(*e);
+    fix->remove(*e2);
+    fix->remove(*e3);
+    fix->remove(*e4);
+    fix->remove(*e5);
+    fix->remove(*l);
+    fix->remove(*l2);
+    fix->remove(*l3);
+    fix->remove(*l4);
+    fix->remove(*l5);
     change_to_home_page();
 }
 
