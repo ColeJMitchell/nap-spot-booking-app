@@ -44,43 +44,30 @@ void Insert::insert_user(int user_id, std::string username, std::string password
 
 
 //adds a nap spot if administrator approved a request or the user adds a new favorite nap spot
-void Insert::insert_nap_spot_or_favorite(std::string table, int id, float latitude, float longitude, std::string name,
-                                         std::string attribute1, std::string attribute2, std::string attribute3,
-                                         int num_people, std::string description ,int reserved){
+void Insert::insert_nap_spot(std::string table, int id,  std::string name, std::string attribute1, std::string attribute2
+,std::string attribute3, std::string photo){
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "INSERT INTO ";
     sql += table;
-    sql += " ( id, latitude, longitude, name, attribute_1, attribute_2, attribute_3, num_people, description, reserved) ";
+    sql += " ( id, name, attribute_1, attribute_2, attribute_3, image, reserve) ";
     sql += "VALUES (";
     sql += std::to_string(id);
-    sql += ",";
-    sql += std::to_string(latitude);
-    sql += ",";
-    sql += std::to_string(longitude);
-    sql += ",";
-    sql += "\"";
+    sql += ", '''";
     sql += name;
-    sql += "\",";
-    sql += "\"";
+    sql += "''', '''";
     sql += attribute1;
-    sql += "\",";
-    sql += "\"";
+    sql += "''', '''";
     sql += attribute2;
-    sql += "\",";
-    sql += "\"";
+    sql += "''', '''";
     sql += attribute3;
-    sql += "\"";
-    sql += ",";
-    sql += std::to_string(num_people);
-    sql += ",";
-    sql += "\"";
-    sql += description;
-    sql += " ";
-    sql += std::to_string(reserved);
-    sql += "\");";
+    sql += "''', \"";
+    sql += photo;
+    sql += "\", ";
+    sql += std::to_string(0);
+    sql += " );";
     retCode = sqlite3_exec(curr_db,
                            sql.c_str(),
                            0,

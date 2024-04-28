@@ -7,12 +7,11 @@
 #include <string>
 class Insert{
 public:
-    void insert_nap_spot_or_favorite(std::string table, int id, float latitude, float longitude, std::string name,
-                                     std::string attribute1, std::string attribute2, std::string attribute3,
-                                     int num_people,
-                                     std::string description, int reserved);
-
 
     void insert_user(int user_id, std::string username, std::string password, int privledge);
+
+
+    void insert_nap_spot(std::string table, int id, std::string name, std::string attribute1, std::string attribute2,
+                         std::string attribute3, std::string photo);
 };
 #endif //GOLD_INSERT_H

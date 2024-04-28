@@ -28,6 +28,11 @@ Gtk::Entry *e4;
 Gtk::Entry *e5;
 std::string username;
 std::string password;
+std::string nap_spot_name;
+std::string attribute1;
+std::string attribute2;
+std::string attribute3;
+std::string photo;
 int book_id;
 int num_minutes;
 int favorite_id;
@@ -334,11 +339,28 @@ void Multiple_windows::change_to_request_page(){
         fix->put(*e4, 845, 550);
         fix->put(*e5, 845, 700);
 
+        e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_name_entered));
+        e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_attribute1_entered));
+        e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_attribute2_entered));
+        e4->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_attribute3_entered));
+        e5->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_photo_entered));
+        b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_nap_spot));
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
         show_all_children();
     }
 }
 
+
+void Multiple_windows :: on_submit_nap_spot(){
+    Insert i;
+    Select s;
+    i.insert_nap_spot("new_nap_spots",s.get_row_count("nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
+    e->set_text("");
+    e2->set_text("");
+    e3->set_text("");
+    e4->set_text("");
+    e5->set_text("");
+}
 
 void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*b3);
@@ -417,6 +439,27 @@ void Multiple_windows::on_password_entered(){
 void Multiple_windows::on_username_entered(){
     username = e2->get_text();
 }
+
+void Multiple_windows::on_name_entered(){
+    nap_spot_name = e->get_text();
+}
+
+void Multiple_windows::on_attribute1_entered(){
+    attribute1 = e2->get_text();
+}
+
+void Multiple_windows::on_attribute2_entered(){
+    attribute2 = e3->get_text();
+}
+
+void Multiple_windows::on_attribute3_entered(){
+    attribute3 = e4->get_text();
+}
+
+void Multiple_windows::on_photo_entered(){
+    photo = e5->get_text();
+}
+
 
 void Multiple_windows::on_book_id_entered(){
     Select s;

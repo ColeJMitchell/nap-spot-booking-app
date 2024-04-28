@@ -20,6 +20,15 @@ create table nap_spots(
 	reserve varchar(10)
 );
 
+create table new_nap_spots(
+    id int,
+    name varchar(20) not null,
+    attribute_1 varchar(10),
+    attribute_2 varchar(10),
+    attribute_3 varchar(10),
+    image varchar(100),
+    reserve varchar(10)
+);
 .separator ","
 .mode csv
 .import "CSV/users.csv" user_information

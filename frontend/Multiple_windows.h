@@ -83,6 +83,18 @@ public:
     void on_remove_clicked();
 
     void on_back_clicked_request();
+
+    void on_name_entered();
+
+    void on_attribute1_entered();
+
+    void on_attribute2_entered();
+
+    void on_attribute3_entered();
+
+    void on_photo_entered();
+
+    void on_submit_nap_spot();
 };
 
 
