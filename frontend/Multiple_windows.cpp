@@ -711,6 +711,7 @@ void Multiple_windows::on_submit_login(){
     //determines if the information is inside the entries
     if(s.determine_if_user_exists("user_information",username, password)!=-1 && (password!="" || username!="")) {
         current_user = s.determine_if_user_exists("user_information",username, password);
+        reserved = false;
         fix->remove(*e);
         fix->remove(*e2);
         fix->remove(*l);
@@ -940,7 +941,7 @@ void Multiple_windows::on_scroll_up_clicked_request(){
     }
     l= Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
-    fix->put(*l,790,20+offset2_request);
+    fix->put(*l,770,20+offset2_request);
     show_all_children();
 }
 //when the scroll down button is clicked on the request page for the Admin
@@ -957,7 +958,7 @@ void Multiple_windows::on_scroll_down_clicked_request(){
     }
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>New Nap Spots</b></span>");
-    fix->put(*l,790,20+offset2_request);
+    fix->put(*l,770,20+offset2_request);
     show_all_children();
 }
 
