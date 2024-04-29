@@ -408,7 +408,10 @@ void Multiple_windows::change_to_request_page(){
 void Multiple_windows :: on_submit_nap_spot(){
     Insert i;
     Select s;
-    i.insert_new_nap_spot("new_nap_spots",s.get_row_count("new_nap_spots"),nap_spot_name,attribute1,attribute2,attribute3,photo);
+    if(photo!="Error") {
+        i.insert_new_nap_spot("new_nap_spots", s.get_row_count("new_nap_spots"), nap_spot_name, attribute1, attribute2,
+                              attribute3, photo);
+    }
     e->set_text("");
     e2->set_text("");
     e3->set_text("");
@@ -577,7 +580,15 @@ void Multiple_windows::on_attribute3_entered(){
 }
 
 void Multiple_windows::on_photo_entered(){
-    photo = e5->get_text();
+    if(e5->get_text() == "Good photo"){
+        photo = "../photos/IMG_3326.jpg";
+    }
+    else if(e5->get_text() == "Bad photo"){
+        photo = "../photos/IMG_3332.jpg";
+    }
+    else{
+        photo = "Error";
+    }
 }
 
 
