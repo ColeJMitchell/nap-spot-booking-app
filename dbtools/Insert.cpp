@@ -84,7 +84,7 @@ void Insert::insert_new_nap_spot(std::string table, int id,  std::string name, s
     }
     sqlite3_close(curr_db);
 }
-
+//selects nap spot information and adds it to different sections of the database
 void Insert::insert_nap_spot(std::string table, int id,  std::string name, std::string attribute1, std::string attribute2
         ,std::string attribute3, std::string photo){
     sqlite3 *curr_db;

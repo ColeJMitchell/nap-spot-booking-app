@@ -26,6 +26,7 @@ Gtk::Entry *e2;
 Gtk::Entry *e3;
 Gtk::Entry *e4;
 Gtk::Entry *e5;
+//
 std::string username;
 std::string password;
 std::string nap_spot_name;
@@ -120,7 +121,7 @@ void Multiple_windows::change_to_signuppage(){
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 }
-
+//Changes viewed page to the starting login page
 void Multiple_windows::change_to_loginpage(){
     override_background_color(Gdk::RGBA("orange"));
     e = Gtk::manage(new Gtk::Entry);
@@ -138,13 +139,14 @@ void Multiple_windows::change_to_loginpage(){
     fix ->put(*e2,1920/2-120,1080/2-120);
     fix->put(*b3, 1920/2-400,1080/2+200);
     fix->put(*b4, 1920/2+160,1080/2+200);
+    //connects the button functions to different pages
     e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_login));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 }
-
+//Changes the viewd page to the MAIN home page
 void Multiple_windows::change_to_home_page(){
     override_background_color(Gdk::RGBA("salmon"));
     b4 = new Button("Back to Login",170,100);
@@ -155,13 +157,14 @@ void Multiple_windows::change_to_home_page(){
     fix->put(*b6,820,400);
     fix->put(*b4,859, 800);
     fix ->put(*b7,1420,400);
+    //connects the button functions to different pages
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_home));
     b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_clicked));
     b6->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_clicked));
     b7->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_request_clicked));
     show_all_children();
 }
-
+//Changes the viewed page to the favorites page
 void Multiple_windows::change_to_favorite_page(){
     is_favorite_page = true;
     Select s;
@@ -195,6 +198,7 @@ void Multiple_windows::change_to_favorite_page(){
     fix->put(*l5 ,1350,530);
     fix->put(*e3 ,1350,570);
     std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+    //creates sections for the favorite nap spots to show
     for(int i=4; i<9; i++){
         try{
             if(std::stoi(s3[i])!=-1){
@@ -213,6 +217,7 @@ void Multiple_windows::change_to_favorite_page(){
         fix->put(*f3, 680,150+offset_favorite);
         offset_favorite+=600;
     }
+    //connects the button functions to different functions
     b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_favorite));
     b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_favorite));
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_favorite));
@@ -225,6 +230,7 @@ void Multiple_windows::change_to_favorite_page(){
 }
 
 int offset2_favorite = 0;
+//goes back from the favorites page back to the home main page
 void Multiple_windows::on_back_clicked_favorite(){
     fix->remove(*l6);
     fix->remove(*l5);
@@ -248,6 +254,7 @@ void Multiple_windows::on_back_clicked_favorite(){
     change_to_home_page();
 }
 
+//changes page to the book page where user can book spots
 void Multiple_windows::change_to_book_page(){
     is_book_page = true;
     Select s;
@@ -282,8 +289,10 @@ void Multiple_windows::change_to_book_page(){
     l = Gtk::manage(new Gtk::Label);
     l->set_markup("<span size = '30000'><b>Available Nap Spots</b></span>");
     fix->put(*l,725,20);
+    //connects the button functions to different functions
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
+    //creates the frame to display nap spots
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
         add_nap_spot_frame(s2, 0);
@@ -292,7 +301,7 @@ void Multiple_windows::change_to_book_page(){
         fix->put(*f2, 664,150+offset);
         offset+=600;
     }
-
+    //button functionality
     e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_id_entered));
     e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_minutes_entered));
     e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_favorite_id_entered));
@@ -302,16 +311,20 @@ void Multiple_windows::change_to_book_page(){
     show_all_children();
 }
 
+//changes the viewed page to show the request nap spot page
 void Multiple_windows::change_to_request_page(){
+    //determines whether an admin or user is on this page
     int privledge;
     Select s;
     std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    //checks for the priveledge attribute
     try{
         privledge = std::stoi(s2[3]);
     }
     catch(const std::exception& e){
 
     }
+    //if the user is NOT an admin
     if(privledge == 0) {
         override_background_color(Gdk::RGBA("grey"));
         l = Gtk::manage(new Gtk::Label);
@@ -343,7 +356,7 @@ void Multiple_windows::change_to_request_page(){
         fix->put(*e3, 845, 400);
         fix->put(*e4, 845, 550);
         fix->put(*e5, 845, 700);
-
+        //connects the inputs so the user can create their own nap spot
         e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_name_entered));
         e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_attribute1_entered));
         e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_attribute2_entered));
@@ -353,6 +366,7 @@ void Multiple_windows::change_to_request_page(){
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
         show_all_children();
     }
+    //If the user IS AN admin
     else if(privledge == 1){
         override_background_color(Gdk::RGBA("white"));
         b = new Button("Scroll up",170,100);
@@ -378,6 +392,7 @@ void Multiple_windows::change_to_request_page(){
         fix->put(*l4 ,1350,530);
         fix->put(*e ,1350,200);;
         fix->put(*e3 ,1350,570);
+        //allows the admin to allow or deny a nap spot to be created
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request_admin));
         b->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_up_clicked_request));
         b2->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_scroll_down_clicked_request));
@@ -385,6 +400,7 @@ void Multiple_windows::change_to_request_page(){
         b5->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_denial));
         e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_approve_id_entered));
         e3->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_deny_id_entered));
+        //displays the requested nap spots on the page so the admin can review
         for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
             std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
             try{
@@ -404,10 +420,11 @@ void Multiple_windows::change_to_request_page(){
     }
 }
 
-
+//Submitting a nap spot for users
 void Multiple_windows :: on_submit_nap_spot(){
     Insert i;
     Select s;
+    //photos must have a certain attribute
     if(photo!="Error") {
         i.insert_new_nap_spot("new_nap_spots", s.get_row_count("new_nap_spots"), nap_spot_name, attribute1, attribute2,
                               attribute3, photo);
@@ -419,6 +436,7 @@ void Multiple_windows :: on_submit_nap_spot(){
     e5->set_text("");
 }
 
+//reloads the request page for admins to review
 void Multiple_windows :: reload_request_page(){
     Select s;
     for(Gtk::Frame *f2 : *f3){
@@ -426,6 +444,7 @@ void Multiple_windows :: reload_request_page(){
     }
     f3->clear();
     offset_request = 0;
+    //adds the requested nap spots to show on the admins page
     for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
         try{
@@ -444,11 +463,12 @@ void Multiple_windows :: reload_request_page(){
     show_all_children();
 
 }
-
+//When the admin approves a nap spot request
 void Multiple_windows :: on_approval(){
     Select s;
     Update u;
     Insert i;
+    //approves the nap spot and inserts it into the nap spot page for users to see
     std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",approve_id);
     i.insert_nap_spot("nap_spots",s.get_row_count("nap_spots"),s2[1],s2[2],s2[3],s2[4],s2[5]);
     u.update_new_nap_spot(approve_id);
@@ -457,14 +477,16 @@ void Multiple_windows :: on_approval(){
 
 }
 
+//When the nap spot is denied
 void Multiple_windows :: on_denial(){
     Update u;
     u.update_new_nap_spot(deny_id);
+    //removes the nap spot and reloads the page
     e3->set_text("");
     reload_request_page();
 }
 
-
+//When back is clicked on the request page, it changes the viewed page to the home page
 void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*b3);
     fix->remove(*b4);
@@ -481,6 +503,7 @@ void Multiple_windows :: on_back_clicked_request(){
     change_to_home_page();
 }
 
+//When the back is clicked as an admin on the request page
 void Multiple_windows :: on_back_clicked_request_admin(){
     fix->remove(*b4);
     fix->remove(*l);
@@ -492,6 +515,7 @@ void Multiple_windows :: on_back_clicked_request_admin(){
     fix->remove(*b2);
     fix->remove(*b3);
     fix->remove(*b5);
+    //changes the frame for the admin account
     for(Gtk::Frame *f2 : *f3){
         fix->remove(*f2);
     }
@@ -501,6 +525,7 @@ void Multiple_windows :: on_back_clicked_request_admin(){
     change_to_home_page();
 }
 
+//changes from the home page to the request page
 void Multiple_windows::on_request_clicked(){
     fix->remove(*b4);
     fix->remove(*b5);
@@ -509,10 +534,12 @@ void Multiple_windows::on_request_clicked(){
     change_to_request_page();
 }
 
+//when remove is on the favorites list
 void Multiple_windows::on_remove_clicked(){
     Select s;
     Update u;
     std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    //removes the id of the favorites list and updates the list accordingly
     if(remove_id >= 0) {
         for (int i = 4; i < 9; i++) {
             try {
@@ -530,6 +557,7 @@ void Multiple_windows::on_remove_clicked(){
         f2->clear();
         offset_favorite = 0;
         std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
+        //updates the frames of the favorites list
         for(int i=4; i<9; i++){
             try{
                 if(std::stoi(s3[i])!=-1){
@@ -558,27 +586,27 @@ void Multiple_windows::on_remove_clicked(){
 void Multiple_windows::on_password_entered(){
         password = e->get_text();
 }
-
+//callback for username input in entry widget
 void Multiple_windows::on_username_entered(){
     username = e2->get_text();
 }
-
+//callback for name input in entry widget
 void Multiple_windows::on_name_entered(){
     nap_spot_name = e->get_text();
 }
-
+//callback for attribute 1 input in entry widget
 void Multiple_windows::on_attribute1_entered(){
     attribute1 = e2->get_text();
 }
-
+//callback for attribute 2 input in entry widget
 void Multiple_windows::on_attribute2_entered(){
     attribute2 = e3->get_text();
 }
-
+//callback for attribute 3 input in entry widget
 void Multiple_windows::on_attribute3_entered(){
     attribute3 = e4->get_text();
 }
-
+//callback for photo input in entry widget (good or bad)
 void Multiple_windows::on_photo_entered(){
     if(e5->get_text() == "Good photo"){
         photo = "../photos/IMG_3326.jpg";
@@ -590,8 +618,7 @@ void Multiple_windows::on_photo_entered(){
         photo = "Error";
     }
 }
-
-
+//callback for book id input in entry widget
 void Multiple_windows::on_book_id_entered(){
     Select s;
     try {
@@ -603,7 +630,7 @@ void Multiple_windows::on_book_id_entered(){
         book_id = -1;
     }
 }
-
+//callback for approval id input in entry widget for Admin
 void Multiple_windows::on_approve_id_entered(){
     Select s;
     try {
@@ -615,7 +642,7 @@ void Multiple_windows::on_approve_id_entered(){
         approve_id = -1;
     }
 }
-
+//callback for denial id input in entry widget for admin
 void Multiple_windows::on_deny_id_entered(){
     Select s;
     try {
@@ -627,7 +654,7 @@ void Multiple_windows::on_deny_id_entered(){
         deny_id = -1;
     }
 }
-
+//callback for removal id input in entry widget for favorites list
 void Multiple_windows::on_remove_id_entered(){
     Select s;
     try {
@@ -639,7 +666,7 @@ void Multiple_windows::on_remove_id_entered(){
         remove_id = -1;
     }
 }
-
+//callback for minutes input in entry widget for booking
 void Multiple_windows::on_minutes_entered(){
     try {
         num_minutes = std::stoi(e2->get_text());
@@ -650,7 +677,7 @@ void Multiple_windows::on_minutes_entered(){
         num_minutes = -1;
     }
 }
-
+//callback for favorite id input in entry widget for user
 void Multiple_windows::on_favorite_id_entered(){
     Select s;
     Update u;
@@ -660,10 +687,10 @@ void Multiple_windows::on_favorite_id_entered(){
         favorite_id = -1;
     }
 }
-
-
+//submit login button functionality
 void Multiple_windows::on_submit_login(){
     Select s;
+    //determines if the information is inside the entries
     if(s.determine_if_user_exists("user_information",username, password)!=-1) {
         current_user = s.determine_if_user_exists("user_information",username, password);
         fix->remove(*e);
@@ -677,10 +704,11 @@ void Multiple_windows::on_submit_login(){
         change_to_home_page();
     }
 }
-
+//submit signup button functionality
 void Multiple_windows::on_submit_signup(){
     Insert i;
     Select s;
+    // determines if the information is inside the entries
     if(s.determine_if_user_exists("user_information",username, password)==-1) {
         int count = s.get_row_count("user_information");
         i.insert_user(count,username,password,0);
@@ -696,8 +724,7 @@ void Multiple_windows::on_submit_signup(){
         change_to_home_page();
     }
 }
-
-
+//changes the page to the favorites list page
 void Multiple_windows::on_favorite_clicked(){
     fix->remove(*b4);
     fix->remove(*b5);
@@ -705,7 +732,7 @@ void Multiple_windows::on_favorite_clicked(){
     fix->remove(*b7);
     change_to_favorite_page();
 }
-
+//changes the page to the booking page
 void Multiple_windows::on_book_clicked(){
     fix->remove(*b4);
     fix->remove(*b5);
@@ -721,14 +748,14 @@ void Multiple_windows::on_sign_up_clicked() {
     fix->remove(*b2);
     change_to_signuppage();
 }
-
+//checks if log in button is clicked and switches page if it is
 void Multiple_windows::on_log_in_clicked() {
     // Change to page 2
     fix->remove(*b);
     fix->remove(*b2);
     change_to_loginpage();
 }
-
+//checks if back button is clicked and switches page if it is
 void Multiple_windows::on_back_clicked() {
     fix->remove(*e);
     fix->remove(*e2);
@@ -738,7 +765,7 @@ void Multiple_windows::on_back_clicked() {
     fix->remove(*b4);
     change_to_page_open();
 }
-
+//checks if back button is clicked on home page and switches page if it is
 void Multiple_windows::on_back_clicked_home(){
     fix->remove(*b4);
     fix->remove(*b5);
@@ -748,6 +775,7 @@ void Multiple_windows::on_back_clicked_home(){
 }
 
 int offset2 = 0;
+//checks if back button is clicked on booking page and switches to home page if it is
 void Multiple_windows::on_back_clicked_book(){
     fix->remove(*b);
     fix->remove(*b2);
@@ -770,10 +798,11 @@ void Multiple_windows::on_back_clicked_book(){
     is_book_page = false;
     change_to_home_page();
 }
-
+//if the favorite spot button is clicked in the booking page
 void Multiple_windows::on_favorite_clicked_book(){
 Select s;
 Update u;
+//gets the id of the favorite spot and checks if its real, then updates the favorite list for the user
 if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
     std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
     for(int i = 4; i<9; i++){
@@ -804,6 +833,7 @@ if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
 e3->set_text("");
 }
 
+//when the scroll up button is clicked on the booking page
 void Multiple_windows::on_scroll_up_clicked(){
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
@@ -823,6 +853,7 @@ void Multiple_windows::on_scroll_up_clicked(){
     show_all_children();
 }
 
+//when the scroll down button is clicked on the booking page
 void Multiple_windows::on_scroll_down_clicked(){
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
@@ -839,7 +870,7 @@ void Multiple_windows::on_scroll_down_clicked(){
     fix->put(*l,725,20+offset2);
     show_all_children();
 }
-
+//when the scroll up button is clicked on the favorites page
 void Multiple_windows::on_scroll_up_clicked_favorite(){
     for(Gtk::Frame *f3 : *f2){
         fix->remove(*f3);
@@ -858,7 +889,7 @@ void Multiple_windows::on_scroll_up_clicked_favorite(){
     fix->put(*l6,690,20+offset2_favorite);
     show_all_children();
 }
-
+//when the scroll down button is clicked on the favorites page
 void Multiple_windows::on_scroll_down_clicked_favorite(){
     for(Gtk::Frame *f3 : *f2){
         fix->remove(*f3);
@@ -875,7 +906,7 @@ void Multiple_windows::on_scroll_down_clicked_favorite(){
     fix->put(*l6,690,20+offset2_favorite);
     show_all_children();
 }
-
+//when the scroll up button is clicked on the request page for the Admin
 void Multiple_windows::on_scroll_up_clicked_request(){
     for(Gtk::Frame *f2 : *f3){
         fix->remove(*f2);
@@ -894,7 +925,7 @@ void Multiple_windows::on_scroll_up_clicked_request(){
     fix->put(*l,790,20+offset2_request);
     show_all_children();
 }
-
+//when the scroll down button is clicked on the request page for the Admin
 void Multiple_windows::on_scroll_down_clicked_request(){
     for(Gtk::Frame *f2 : *f3){
         fix->remove(*f2);
@@ -912,7 +943,7 @@ void Multiple_windows::on_scroll_down_clicked_request(){
     show_all_children();
 }
 
-
+//countdown functionality for the nap spots
 int temp_num;
 int temp_id;
 void Multiple_windows::countdown() {
@@ -920,9 +951,12 @@ void Multiple_windows::countdown() {
     Select s;
     int num = temp_num;
     int id = temp_id;
+    //the countdown will update with the number of minutes inputted by the user
+    //sets the nap spots to "Open" with no countdown by default when countdown is up
     std::this_thread::sleep_for(std::chrono::minutes(num));
     u.update_reservation(id, "Open");
     reserved = false;
+    //updates the book page with countdown information for nap spot
     if(is_book_page){
     for(Gtk::Frame *f2 : *f){
         fix->remove(*f2);
@@ -939,6 +973,7 @@ void Multiple_windows::countdown() {
     }
     show_all_children();
     }
+    //updates the favorites page with countdown information for nap spot
     else if(is_favorite_page){
         for(Gtk::Frame *f3 : *f2){
             fix->remove(*f3);
@@ -970,21 +1005,24 @@ void Multiple_windows::countdown() {
 
 
 }
-
+//when the user selects the book nap spot button
 void Multiple_windows::on_book_nap_spot_clicked(){
     Update u;
     temp_num = num_minutes;
     temp_id = book_id;
     Select s;
+    //checks if the user inputted wrong information
     if(book_id == -1 || num_minutes == -1 || reserved == true){
         e->set_text("");
         e2->set_text("");
         return;
     }
+    //Updates the nap spot as "reserved" once the user books the spot
     else{
         u.update_reservation(temp_id,"Reserved");
         reserved = true;
     }
+    //Updates the booking page for the users showing that a nap spot is reserved
     if(is_book_page) {
         for (Gtk::Frame *f2: *f) {
             fix->remove(*f2);
@@ -1001,6 +1039,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
         }
         e->set_text("");
         e2->set_text("");
+        //checks for the reservation countdown of the nap spot
         try {
             std::thread countdown_thread(&Multiple_windows::countdown, this);
             countdown_thread.detach();
@@ -1008,6 +1047,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
 
         }
     }
+    //Updates the favorites page for the users showing that a nap spot is reserved
     else if(is_favorite_page){
         for(Gtk::Frame *f3 : *f2){
             fix->remove(*f3);
@@ -1035,6 +1075,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
         }
         e->set_text("");
         e2->set_text("");
+        //checks for the reservation countdown of the nap spot
         try {
             std::thread countdown_thread(&Multiple_windows::countdown, this);
             countdown_thread.detach();
@@ -1045,11 +1086,11 @@ void Multiple_windows::on_book_nap_spot_clicked(){
     show_all_children();
 }
 
-
+//The frame of each nap spot
 void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     Gtk::Frame *frame = Gtk::manage(new Gtk::Frame);
     frame->set_size_request(550, 500);
-
+    //creates the layout displaying the nap spot information
     Gtk::Box* box = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
     std::string ID = "Nap Spot ID: " + s[0];
     std::string Name = "Nap Spot Name: " + s[1].substr(1, s[1].size() - 2);
@@ -1057,7 +1098,7 @@ void Multiple_windows::add_nap_spot_frame(std::vector<std::string> s, int i){
     std::string Attribute2 = "Attribute 2: " + s[3].substr(1, s[3].size() - 2);
     std::string Attribute3 = "Attribute 3: " + s[4].substr(1, s[4].size() - 2);
     std::string Availibility = "Availibility Status: " + s[6];
-
+    //creates the nap spot box holding all information and image
     Gtk::Label* label1 = Gtk::manage(new Gtk::Label());
     label1->set_markup("<b><span size='large'>" + ID + "</span></b>");
     Gtk::Label* label2 = Gtk::manage(new Gtk::Label());

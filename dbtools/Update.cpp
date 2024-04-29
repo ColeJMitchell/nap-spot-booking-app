@@ -6,7 +6,7 @@
 #include <sqlite3.h>
 #include <iostream>
 
-//update user information such as a password, email, or username.
+//updates napspots when a spot is reserved
 void Update::update_reservation(int id, std::string reserve) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
@@ -31,7 +31,7 @@ void Update::update_reservation(int id, std::string reserve) {
         sqlite3_free(zErrMsg);
     }
     }
-
+//updates new nap spots when added
 void Update::update_new_nap_spot(int id) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
@@ -56,7 +56,7 @@ void Update::update_new_nap_spot(int id) {
         sqlite3_free(zErrMsg);
     }
 }
-
+//updates favorite nap spots in list for user
     void Update::update_favorite(int id, int favorite, int value) {
         sqlite3 *curr_db;
         int rc = sqlite3_open("../database/database.sqlite", &curr_db);

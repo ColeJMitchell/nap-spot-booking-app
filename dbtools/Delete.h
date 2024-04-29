@@ -7,6 +7,7 @@
 #include <string>
 class Delete{
 public:
+    //removes information from the database
     void delete_from_table(std::string table, int id);
 };
 #endif //GOLD_DELETE_H
