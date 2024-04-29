@@ -664,7 +664,7 @@ void Multiple_windows::on_favorite_id_entered(){
 
 void Multiple_windows::on_submit_login(){
     Select s;
-    if(s.determine_if_user_exists("user_information",username, password)!=-1) {
+    if(s.determine_if_user_exists("user_information",username, password)!=-1 && (password!="" || username!="")) {
         current_user = s.determine_if_user_exists("user_information",username, password);
         fix->remove(*e);
         fix->remove(*e2);
@@ -681,7 +681,7 @@ void Multiple_windows::on_submit_login(){
 void Multiple_windows::on_submit_signup(){
     Insert i;
     Select s;
-    if(s.determine_if_user_exists("user_information",username, password)==-1) {
+    if(s.determine_if_user_exists("user_information",username, password)==-1&&(password!="" || username!="")) {
         int count = s.get_row_count("user_information");
         i.insert_user(count,username,password,0);
         current_user = count;
