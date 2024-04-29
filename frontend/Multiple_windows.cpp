@@ -146,11 +146,25 @@ void Multiple_windows::change_to_loginpage(){
 }
 
 void Multiple_windows::change_to_home_page(){
+    Select s;
+    int privledge;
     override_background_color(Gdk::RGBA("salmon"));
     b4 = new Button("Back to Login",170,100);
     b5 = new Button("Favorite Nap Spots",250,150);
     b6 = new Button("Book a Nap Spot",250,150);
-    b7 = new Button("Submit a Location Request",250,150);
+    std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+    try{
+        privledge = std::stoi(s2[3]);
+    }
+    catch(const std::exception& e){
+
+    }
+    if(privledge == 0) {
+        b7 = new Button("Submit a Location Request", 250, 150);
+    }
+    else if(privledge == 1){
+        b7 = new Button("Approve or Deny Location Request", 250, 150);
+    }
     fix->put(*b5,240,400);
     fix->put(*b6,820,400);
     fix->put(*b4,859, 800);
@@ -478,6 +492,10 @@ void Multiple_windows :: on_back_clicked_request(){
     fix->remove(*l3);
     fix->remove(*l4);
     fix->remove(*l5);
+    for(Gtk::Frame *f2 : *f3){
+        fix->remove(*f2);
+    }
+    f3->clear();
     change_to_home_page();
 }
 
