@@ -14,12 +14,14 @@ protected:
         s1 = new Select;
         d1 = new Delete;
         i1->insert_user(100,"Generic", "Password",0);
+        i1->insert_nap_spot("nap_spots",100,"'test'","'na'","'na'","'na'","na");
     }
 
     virtual void TearDown() {
         delete i1;
         delete s1;
         d1->delete_from_table("user_information","user_id", 100);
+        d1->delete_from_table("nap_spots","id",100);
         delete d1;
     }
 
@@ -29,11 +31,17 @@ protected:
 };
 
 TEST_F(SelectTest, TESTFIXTURE) {
-    std::vector<std::string> expected = {"100", "Generic", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
-    std::vector<std::string> test = s1->get_one_row_id_user("user_information", 100);
+    std::vector<std::string> expected_user = {"100", "Generic", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
+    std::vector<std::string> expected_nap_spot = {"100", "'test'", "'na'", "'na'", "'na'", "na", "Open"};
+    std::vector<std::string> test_user = s1->get_one_row_id_user("user_information", 100);
+    std::vector<std::string> test_nap_spot = s1->get_one_row_id("nap_spots", 100);
     for(int i =0; i< 9; i++) {
-        ASSERT_EQ(test[i],expected[i]);
+        ASSERT_EQ(test_user[i],expected_user[i]);
     }
+    for(int i =0; i< 7; i++) {
+        ASSERT_EQ(test_nap_spot[i],expected_nap_spot[i]);
+    }
+    ASSERT_EQ(s1->get_row_count("user_information"),3);
 
 }
 /*
