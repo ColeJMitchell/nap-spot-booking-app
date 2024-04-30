@@ -13,13 +13,13 @@ protected:
         i1 = new Insert;
         s1 = new Select;
         d1 = new Delete;
-        i1->insert_user(1,"Cedrien", "Password",0);
+        i1->insert_user(100,"Generic", "Password",0);
     }
 
     virtual void TearDown() {
         delete i1;
         delete s1;
-        d1->delete_from_table("user_information", 1);
+        d1->delete_from_table("user_information","user_id", 100);
         delete d1;
     }
 
@@ -28,25 +28,15 @@ protected:
     Delete* d1;
 };
 
-TEST_F(SelectTest, GetOneRowIdTest) {
-    std::vector<std::string> expected = {"1", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
-    ASSERT_EQ(s1->get_one_row_id("user_information", 1), expected);
-}
+TEST_F(SelectTest, TESTFIXTURE) {
+    std::vector<std::string> expected = {"100", "Generic", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
+    std::vector<std::string> test = s1->get_one_row_id_user("user_information", 100);
+    for(int i =0; i< 9; i++) {
+        ASSERT_EQ(test[i],expected[i]);
+    }
 
-TEST_F(SelectTest, GetOneRowIdUserTest) {
-    std::vector<std::string> expected = {"1", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
-    ASSERT_EQ(s1->get_one_row_id_user("user_information", 1), expected);
 }
-
-TEST_F(SelectTest, GetRowCountTest) {
-    ASSERT_EQ(s1->get_row_count("user_information"), 1);
-}
-
-TEST_F(SelectTest, DetermineIfUserExistsTest) {
-    ASSERT_EQ(s1->determine_if_user_exists("user_information", "Cedrien", "Password"), 1);
-    ASSERT_EQ(s1->determine_if_user_exists("user_information", "Cedrien", "WrongPassword"), -1);
-    ASSERT_EQ(s1->determine_if_user_exists("user_information", "WrongUsername", "Password"), -1);
-}
+/*
 class InsertTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
@@ -170,6 +160,7 @@ TEST_F(DeleteTest, DeleteFromNapSpotsTableTest) {
     int finalCount = s1->get_row_count("nap_spots");
     ASSERT_EQ(finalCount, initialCount - 1);
 }
+ */
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

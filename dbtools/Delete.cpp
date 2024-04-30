@@ -6,16 +6,18 @@
 #include <iostream>
 
 //deletes a user if they violated rules or client wants to delete their account / removes a nap spot from favorites list
-void Delete::delete_from_table(std::string table, int id) {
+void Delete::delete_from_table(std::string table, std::string id_type, int id) {
     sqlite3 *curr_db;
     int rc = sqlite3_open("../database/database.sqlite", &curr_db);
     int retCode = 0;
     char *zErrMsg = 0;
     std::string sql = "DELETE FROM ";
     sql += table;
-    sql += " WHERE id = \"";
+    sql += " WHERE ";
+    sql += id_type;
+    sql += " = ";
     sql += std::to_string(id);
-    sql += "\";";
+    sql += ";";
     retCode = sqlite3_exec(curr_db,
                            sql.c_str(),
                            0, // no call back needed for Delete
