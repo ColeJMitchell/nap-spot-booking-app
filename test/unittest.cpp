@@ -42,7 +42,7 @@ TEST_F(SelectTest, TESTFIXTURE) {
         ASSERT_EQ(test_nap_spot[i],expected_nap_spot[i]);
     }
     ASSERT_EQ(s1->get_row_count("user_information"),3);
-
+    ASSERT_EQ(s1->determine_if_user_exists("user_information","Generic","Password"),100);
 }
 /*
 class InsertTest : public ::testing::Test {
