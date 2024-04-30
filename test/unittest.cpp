@@ -13,13 +13,13 @@ protected:
         i1 = new Insert;
         s1 = new Select;
         d1 = new Delete;
-        i1->insert_user(2,"Cedrien", "Password",0);
+        i1->insert_user(1,"Cedrien", "Password",0);
     }
 
     virtual void TearDown() {
         delete i1;
         delete s1;
-        d1->delete_from_table("user_information", 2);
+        d1->delete_from_table("user_information", 1);
         delete d1;
     }
 
@@ -29,17 +29,17 @@ protected:
 };
 
 TEST_F(SelectTest, GetOneRowIdTest) {
-    std::vector<std::string> expected = {"2", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
-    ASSERT_EQ(s1->get_one_row_id("user_information", 2), expected);
+    std::vector<std::string> expected = {"1", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
+    ASSERT_EQ(s1->get_one_row_id("user_information", 1), expected);
 }
 
 TEST_F(SelectTest, GetOneRowIdUserTest) {
-    std::vector<std::string> expected = {"2", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
-    ASSERT_EQ(s1->get_one_row_id_user("user_information", 2), expected);
+    std::vector<std::string> expected = {"1", "Cedrien", "Password", "0", "-1", "-1", "-1", "-1", "-1"};
+    ASSERT_EQ(s1->get_one_row_id_user("user_information", 1), expected);
 }
 
 TEST_F(SelectTest, GetRowCountTest) {
-    ASSERT_EQ(s1->get_row_count("user_information"), 2);
+    ASSERT_EQ(s1->get_row_count("user_information"), 1);
 }
 
 TEST_F(SelectTest, DetermineIfUserExistsTest) {
