@@ -61,7 +61,7 @@ int offset = 0;
 int offset_favorite = 0;
 int offset_request = 0;
 int offset2_request = 0;
-//starts the gui and immediately sets page1
+//starts the gui and immediately opens the first page
 Multiple_windows::Multiple_windows() {
     Select s;
     Update u;
@@ -71,6 +71,7 @@ Multiple_windows::Multiple_windows() {
     f3 = new std::vector<Gtk::Frame*>();
     add(*fix);
     reserved = false;
+    //sets all the nap spots back to open because reservations are not persistent once the application closes
     for(int i = 0; i < s.get_row_count("nap_spots"); i++){
         u.update_reservation(i, "Open");
     }
@@ -115,8 +116,10 @@ void Multiple_windows::change_to_signuppage(){
     fix ->put(*e2,1920/2-120,1080/2-120);
     fix->put(*b3, 1920/2-400,1080/2+200);
     fix->put(*b4, 1920/2+160,1080/2+200);
+    //entry is connected to callback which stores user input
     e->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_password_entered));
     e2->signal_changed().connect(sigc::mem_fun(*this, &Multiple_windows::on_username_entered));
+    //callback function takes user to home page or back to first page
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_submit_signup));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
@@ -146,9 +149,10 @@ void Multiple_windows::change_to_loginpage(){
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked));
     show_all_children();
 }
-//Changes the viewd page to the MAIN home page
+//Changes the viewed page to the MAIN home page
 void Multiple_windows::change_to_home_page(){
     Select s;
+    //determines the privledge of the user using a select statement
     int privledge;
     override_background_color(Gdk::RGBA("salmon"));
     b4 = new Button("Back to Login",170,100);
@@ -161,9 +165,11 @@ void Multiple_windows::change_to_home_page(){
     catch(const std::exception& e){
 
     }
+    //if it is a generic user this button appears
     if(privledge == 0) {
         b7 = new Button("Submit a Location Request", 250, 150);
     }
+    //this button appears for administrators
     else if(privledge == 1){
         b7 = new Button("Approve or Deny Location Request", 250, 150);
     }
@@ -212,11 +218,12 @@ void Multiple_windows::change_to_favorite_page(){
     fix->put(*l5 ,1350,530);
     fix->put(*e3 ,1350,570);
     std::vector<std::string> s3 = s.get_one_row_id_user("user_information",current_user);
-    //creates sections for the favorite nap spots to show
+    //creates nap spot frames and adds them to a vector of frames
     for(int i=4; i<9; i++){
         try{
             if(std::stoi(s3[i])!=-1){
                 std::vector<std::string> s2 = s.get_one_row_id("nap_spots",std::stoi(s3[i]));
+                //the one indicates that the frames need to be added to the favorites page
                 add_nap_spot_frame(s2, 1);
             }
             else{
@@ -227,6 +234,7 @@ void Multiple_windows::change_to_favorite_page(){
 
         }
     }
+    //adds all the nap spot frames to the fix widget
     for(Gtk::Frame *f3 : *f2){
         fix->put(*f3, 680,150+offset_favorite);
         offset_favorite+=600;
@@ -306,7 +314,7 @@ void Multiple_windows::change_to_book_page(){
     //connects the button functions to different functions
     b3->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_book));
     b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_book_nap_spot_clicked));
-    //creates the frame to display nap spots
+    //creates the frames to display nap spots
     for(int i=0; i<s.get_row_count("nap_spots"); i++){
         std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
         add_nap_spot_frame(s2, 0);
@@ -626,6 +634,7 @@ void Multiple_windows::on_attribute3_entered(){
 }
 //callback for photo input in entry widget (good or bad)
 void Multiple_windows::on_photo_entered(){
+    //Good photo and Bad photo are hard coded because the path is hard to type in without error
     if(e5->get_text() == "Good photo"){
         photo = "../photos/IMG_3326.jpg";
     }
