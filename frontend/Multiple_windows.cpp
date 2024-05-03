@@ -388,7 +388,7 @@ void Multiple_windows::change_to_request_page(){
         b4->signal_clicked().connect(sigc::mem_fun(*this, &Multiple_windows::on_back_clicked_request));
         show_all_children();
     }
-    //If the user IS AN admin
+        //If the user IS AN admin
     else if(privledge == 1){
         override_background_color(Gdk::RGBA("white"));
         b = new Button("Scroll up",170,100);
@@ -426,9 +426,9 @@ void Multiple_windows::change_to_request_page(){
         for(int i=0; i<s.get_row_count("new_nap_spots"); i++){
             std::vector<std::string> s2 = s.get_one_row_id("new_nap_spots",i);
             try{
-            if(std::stoi(s2[7])==0){
-            add_nap_spot_frame(s2, 2);
-            }
+                if(std::stoi(s2[7])==0){
+                    add_nap_spot_frame(s2, 2);
+                }
             }
             catch(std::exception &e){
 
@@ -610,7 +610,7 @@ void Multiple_windows::on_remove_clicked(){
 
 //callback for password input in entry widget
 void Multiple_windows::on_password_entered(){
-        password = e->get_text();
+    password = e->get_text();
 }
 //callback for username input in entry widget
 void Multiple_windows::on_username_entered(){
@@ -828,37 +828,37 @@ void Multiple_windows::on_back_clicked_book(){
 }
 //if the favorite spot button is clicked in the booking page
 void Multiple_windows::on_favorite_clicked_book(){
-Select s;
-Update u;
+    Select s;
+    Update u;
 //gets the id of the favorite spot and checks if its real, then updates the favorite list for the user
-if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
-    std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
-    for(int i = 4; i<9; i++){
-        try{
-            if(std::stoi(s2[i])==favorite_id){
-                return;
+    if(favorite_id>=0 && favorite_id < s.get_row_count("nap_spots")){
+        std::vector<std::string> s2 = s.get_one_row_id_user("user_information",current_user);
+        for(int i = 4; i<9; i++){
+            try{
+                if(std::stoi(s2[i])==favorite_id){
+                    return;
+                }
+            }
+            catch(const std::exception& e){
+
             }
         }
-        catch(const std::exception& e){
+        for(int i = 4; i<9; i++){
+            try{
+                if(std::stoi(s2[i])!=-1){
+                    continue;
+                }
+                else{
+                    u.update_favorite(current_user,i,favorite_id);
+                    break;
+                }
+            }
+            catch(const std::exception& e){
 
-        }
-    }
-    for(int i = 4; i<9; i++){
-        try{
-        if(std::stoi(s2[i])!=-1){
-            continue;
-        }
-        else{
-            u.update_favorite(current_user,i,favorite_id);
-            break;
             }
         }
-        catch(const std::exception& e){
-
-        }
     }
-    }
-e3->set_text("");
+    e3->set_text("");
 }
 
 //when the scroll up button is clicked on the booking page
@@ -986,22 +986,22 @@ void Multiple_windows::countdown() {
     reserved = false;
     //updates the book page with countdown information for nap spot
     if(is_book_page){
-    for(Gtk::Frame *f2 : *f){
-        fix->remove(*f2);
+        for(Gtk::Frame *f2 : *f){
+            fix->remove(*f2);
+        }
+        f->clear();
+        offset = 0;
+        for(int i=0; i<s.get_row_count("nap_spots"); i++){
+            std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
+            add_nap_spot_frame(s2, 0);
+        }
+        for(Gtk::Frame *f2 : *f){
+            fix->put(*f2, 664,150+offset+offset2);
+            offset+=600;
+        }
+        show_all_children();
     }
-    f->clear();
-    offset = 0;
-    for(int i=0; i<s.get_row_count("nap_spots"); i++){
-        std::vector<std::string> s2 = s.get_one_row_id("nap_spots",i);
-        add_nap_spot_frame(s2, 0);
-    }
-    for(Gtk::Frame *f2 : *f){
-        fix->put(*f2, 664,150+offset+offset2);
-        offset+=600;
-    }
-    show_all_children();
-    }
-    //updates the favorites page with countdown information for nap spot
+        //updates the favorites page with countdown information for nap spot
     else if(is_favorite_page){
         for(Gtk::Frame *f3 : *f2){
             fix->remove(*f3);
@@ -1045,7 +1045,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
         e2->set_text("");
         return;
     }
-    //Updates the nap spot as "reserved" once the user books the spot
+        //Updates the nap spot as "reserved" once the user books the spot
     else{
         u.update_reservation(temp_id,"Reserved");
         reserved = true;
@@ -1075,7 +1075,7 @@ void Multiple_windows::on_book_nap_spot_clicked(){
 
         }
     }
-    //Updates the favorites page for the users showing that a nap spot is reserved
+        //Updates the favorites page for the users showing that a nap spot is reserved
     else if(is_favorite_page){
         for(Gtk::Frame *f3 : *f2){
             fix->remove(*f3);
