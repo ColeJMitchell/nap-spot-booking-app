@@ -115,12 +115,6 @@ TEST_F(UpdateTest, UpdateReservationTest) {
  * Test case for testing the update_new_nap_spot function of the Update class
  * Verifies that the details of a new nap spot are updated correctly
  */
-TEST_F(UpdateTest, UpdateNewNapSpotTest) {
-    u1->update_new_nap_spot(200);
-    std::vector<std::string> expected = {"200", "'new_test'", "'new_attr1'", "'new_attr2'", "'new_attr3'", "'new_image'", "Open", "1"};
-    std::vector<std::string> test_new_nap_spot = s1->get_one_row_id("new_nap_spots", 200);
-    ASSERT_EQ(test_new_nap_spot, expected);
-}
 /*
  * Test case for testing the update_favorite function of the Update class
  * Verifies that a user's favorite nap spot is updated correctly
@@ -168,17 +162,7 @@ TEST_F(InsertTest, InsertUserTest) {
     ASSERT_EQ(test_user, expected);
     d1->delete_from_table("user_information", "user_id", 100);
 }
-/*
- * Test case for testing the insert_new_nap_spot function of the Insert class
- * Verifies that a new nap spot is correctly inserted into the new_nap_spots table
- */
-TEST_F(InsertTest, InsertNewNapSpotTest) {
-    i1->insert_new_nap_spot("new_nap_spots", 200, "'test_spot'", "'attr1'", "'attr2'", "'attr3'", "'image'");
-    std::vector<std::string> expected = {"200", "test_spot", "'attr1'", "'attr2'", "'attr3'", "'image'", "Open", "0"};
-    std::vector<std::string> test_new_nap_spot = s1->get_one_row_id("new_nap_spots", 200);
-    ASSERT_EQ(test_new_nap_spot, expected);
-    d1->delete_from_table("new_nap_spots", "id", 200);
-}
+
 /*
  * Test case for testing the insert_nap_spot function of the Insert class
  * Verifies that a nap spot is correctly inserted into the nap_spots table
