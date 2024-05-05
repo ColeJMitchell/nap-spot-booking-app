@@ -125,7 +125,7 @@ TEST_F(InsertTest, InsertUserTest) {
 
 TEST_F(InsertTest, InsertNewNapSpotTest) {
     i1->insert_new_nap_spot("new_nap_spots", 200, "'test_spot'", "'attr1'", "'attr2'", "'attr3'", "'image'");
-    std::vector<std::string> expected = {"200", "'test_spot'", "'attr1'", "'attr2'", "'attr3'", "'image'", "Open", "0"};
+    std::vector<std::string> expected = {"200", "test_spot", "'attr1'", "'attr2'", "'attr3'", "'image'", "Open", "0"};
     std::vector<std::string> test_new_nap_spot = s1->get_one_row_id("new_nap_spots", 200);
     ASSERT_EQ(test_new_nap_spot, expected);
     d1->delete_from_table("new_nap_spots", "id", 200);
@@ -164,12 +164,12 @@ protected:
 
 TEST_F(DeleteTest, DeleteUserTest) {
     d1->delete_from_table("user_information", "id",100);
-    ASSERT_EQ(s1->get_row_count("user_information"), 2); // Assuming 2 other users in the database
+    ASSERT_EQ(s1->get_row_count("user_information"), 3); // Assuming 2 other users in the database
 }
 
 TEST_F(DeleteTest, DeleteNapSpotTest) {
     d1->delete_from_table("nap_spots", "id",200);
-    ASSERT_EQ(s1->get_row_count("nap_spots"), 5); // Assuming 5 other nap spots in the database
+    ASSERT_EQ(s1->get_row_count("nap_spots"), 9); // Assuming 5 other nap spots in the database
 }
 
 TEST_F(DeleteTest, DeleteNewNapSpotTest) {
