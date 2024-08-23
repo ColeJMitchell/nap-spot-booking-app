@@ -1,5 +1,7 @@
-# To View Our Application Without Cloning It Watch The .mov Video
-
+# IMPORTANT READ FIRST
+1. The Cedrien contributor is my github account tied to lafayette college.
+2. To view our presentation without cloning watch the .mov video included in the repository
+3. My personal contributions include all of the front end (gtk) and back end (sqlite database). My partner assisted with the unit testing; otherwise, the entirety of the project was developed by me.
 
 # Nap Spot Booking Application
 This project is a graphical user interface (GUI) application built using C++ and the GTK+ toolkit. 
