@@ -1,7 +1,7 @@
 # IMPORTANT READ FIRST
-1. The Cedrien contributor is my github account tied to lafayette college.
-2. To view our presentation without cloning, watch the demonstration.mov video included in the repository.
-3. My personal contributions include all of the front end (gtk) and back end (sqlite database). My partner assisted with the unit testing; otherwise, the entirety of the project was conceptualized and developed by me.
+1. My personal contributions include all of the front end (gtk) and back end (sqlite database). My partner assisted with the unit testing; otherwise, the entirety of the project was conceptualized and developed by me
+2. The Cedrien contributor is my github account tied to lafayette college.
+3. To view our presentation without cloning, watch the demonstration.mov video included in the repository.
 4. All user and nap spot information is stored in a sqlite database, and the backend makes SQL queries that are reflected in the front end.
 
 #How To Build Locally
