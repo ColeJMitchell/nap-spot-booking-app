@@ -1,7 +1,14 @@
 # IMPORTANT READ FIRST
 1. The Cedrien contributor is my github account tied to lafayette college.
-2. To view our presentation without cloning watch the .mov video included in the repository
+2. To view our presentation without cloning watch the .mov video included in the repository.
 3. My personal contributions include all of the front end (gtk) and back end (sqlite database). My partner assisted with the unit testing; otherwise, the entirety of the project was conceptualized and developed by me.
+4. All user and nap spot information is stored in a sqlite database and the backend makes SQL queries that are reflected in the front end.
+
+#How To Build Locally
+1. Clone the repository to your local machine.
+2. Open the project in an IDE such as CLion, and the cmake-build-debug directory will automatically be generated.
+3. Navigate CLion's hammer and specify the target as frontend.
+4. In a terminal cd to cmake-build-debug and run ./frontend.
 
 # Nap Spot Booking Application
 This project is a graphical user interface (GUI) application built using C++ and the GTK+ toolkit. 
