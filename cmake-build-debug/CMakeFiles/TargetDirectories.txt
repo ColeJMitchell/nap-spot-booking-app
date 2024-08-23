@@ -1,5 +1,0 @@
-/home/cole/nap-spot-booking-app/cmake-build-debug/CMakeFiles/gold.dir
-/home/cole/nap-spot-booking-app/cmake-build-debug/CMakeFiles/tests.dir
-/home/cole/nap-spot-booking-app/cmake-build-debug/CMakeFiles/frontend.dir
-/home/cole/nap-spot-booking-app/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/cole/nap-spot-booking-app/cmake-build-debug/CMakeFiles/rebuild_cache.dir
