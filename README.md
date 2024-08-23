@@ -1,3 +1,6 @@
+# To View Our Application Without Cloning It Watch The .mov Video
+
+
 # Nap Spot Booking Application
 This project is a graphical user interface (GUI) application built using C++ and the GTK+ toolkit. 
 It allows users to book, favorite, and request nap spots on a university campus or any other relevant location.
