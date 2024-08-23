@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="gold"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gold">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/gold" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 gold"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gold/fast">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/gold" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 gold/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tests">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 tests"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tests/fast">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 tests/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="frontend">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/frontend" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 frontend"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="frontend/fast">
+				<Option output="/home/cole/nap-spot-booking-app/cmake-build-debug/frontend" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/gtkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include"/>
+					<Add directory="/usr/include/atkmm-1.6"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/atkmm-1.6/include"/>
+					<Add directory="/usr/include/gtk-3.0/unix-print"/>
+					<Add directory="/usr/include/gdkmm-3.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/gdkmm-3.0/include"/>
+					<Add directory="/usr/include/giomm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/giomm-2.4/include"/>
+					<Add directory="/usr/include/gtk-3.0"/>
+					<Add directory="/usr/include/at-spi2-atk/2.0"/>
+					<Add directory="/usr/include/at-spi-2.0"/>
+					<Add directory="/usr/include/dbus-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/dbus-1.0/include"/>
+					<Add directory="/usr/include/gio-unix-2.0"/>
+					<Add directory="/usr/include/cairo"/>
+					<Add directory="/usr/include/atk-1.0"/>
+					<Add directory="/usr/include/pangomm-1.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/pangomm-1.4/include"/>
+					<Add directory="/usr/include/glibmm-2.4"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"/>
+					<Add directory="/usr/include/cairomm-1.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/cairomm-1.0/include"/>
+					<Add directory="/usr/include/sigc++-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"/>
+					<Add directory="/usr/include/pango-1.0"/>
+					<Add directory="/usr/include/harfbuzz"/>
+					<Add directory="/usr/include/fribidi"/>
+					<Add directory="/usr/include/pixman-1"/>
+					<Add directory="/usr/include/uuid"/>
+					<Add directory="/usr/include/freetype2"/>
+					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
+					<Add directory="/usr/include/libpng16"/>
+					<Add directory="/usr/include/libmount"/>
+					<Add directory="/usr/include/blkid"/>
+					<Add directory="/usr/include/glib-2.0"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/dbtools"/>
+					<Add directory="/home/cole/nap-spot-booking-app/test"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include"/>
+					<Add directory="/home/cole/nap-spot-booking-app/googletest/include/gtest"/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 frontend/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/cole/nap-spot-booking-app/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/cole/nap-spot-booking-app/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Delete.cpp">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Delete.h">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Insert.cpp">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Insert.h">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Select.cpp">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Select.h">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Update.cpp">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/dbtools/Update.h">
+			<Option target="gold"/>
+			<Option target="tests"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/frontend/Button.cpp">
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/frontend/Button.h">
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/frontend/Multiple_windows.cpp">
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/frontend/Multiple_windows.h">
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/frontend/gui.cpp">
+			<Option target="gold"/>
+			<Option target="frontend"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/googletest/src/gtest-all.cc">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/main.cpp">
+			<Option target="gold"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/test/unittest.cpp">
+			<Option target="tests"/>
+		</Unit>
+		<Unit filename="/home/cole/nap-spot-booking-app/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
