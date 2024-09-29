@@ -1,3 +1,4 @@
+![frontend](frontend.png)<br>
 # IMPORTANT READ FIRST
 1. My personal contributions include all of the front end (gtk) and back end (sqlite database). My partner assisted with the unit testing; otherwise, the entirety of the project was conceptualized and developed by me
 2. The Cedrien contributor is my github account tied to lafayette college.
